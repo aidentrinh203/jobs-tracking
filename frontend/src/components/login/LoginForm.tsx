@@ -74,7 +74,7 @@ export function LoginForm() {
           <div className="signup-mobile-logo-icon">
             <Image
               src="/taskosaur-logo.svg"
-              alt="Taskosaur Logo"
+              alt="NAZ3D Logo"
               width={50}
               height={50}
               className={`size-10 ${
@@ -89,7 +89,7 @@ export function LoginForm() {
             {/* Show as flex row on max-md, block on md+ */}
             <div className="md:hidden">
               Welcome back to
-              <span className="flex items-center justify-center ">Taskosaur </span>
+              <span className="flex items-center justify-center ">NAZ3D </span>
             </div>
 
             {/* Block for md+ */}
@@ -228,7 +228,7 @@ export function LoginForm() {
       </form>
 
       {/* Divider */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
@@ -238,12 +238,12 @@ export function LoginForm() {
           <div className="login-divider-border" />
         </div>
         <div className="login-divider-text-container">
-          <span className="login-divider-text">New to Taskosaur?</span>
+          <span className="login-divider-text">New to NAZ3D?</span>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Sign Up Link */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
@@ -254,7 +254,7 @@ export function LoginForm() {
             <ArrowRight className="login-button-arrow" />
           </Button>
         </Link>
-      </motion.div>
+      </motion.div> */}
 
       {/* Footer */}
       <motion.div

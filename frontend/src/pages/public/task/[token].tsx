@@ -79,7 +79,7 @@ export default function PublicTaskPage() {
   return (
     <>
       <Head>
-        <title>{task.title} | Taskosaur Shared View</title>
+        <title>{task.title} | NAZ3D Shared View</title>
         <meta name="robots" content="noindex, nofollow" />
       </Head>
       <PublicTaskView task={task} token={token as string} />

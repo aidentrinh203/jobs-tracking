@@ -131,13 +131,13 @@ const QuizPage = () => {
 
   return (
     <div className="h-screen bg-[var(--background)] flex flex-col">
-      <SEO title="Welcome to Taskosaur" />
+      <SEO title="Welcome to NAZ3D" />
       <div className="flex-1 flex">
         {/* Image section */}
         <div className="hidden lg:block w-1/2 bg-[var(--primary)] p-8">
           <div className="h-full flex items-center justify-center">
             {currentQuestionData.svg || (
-              <div className="text-center text-[var(--primary-foreground)]">Taskosaur</div>
+              <div className="text-center text-[var(--primary-foreground)]">NAZ3D</div>
             )}
           </div>
         </div>

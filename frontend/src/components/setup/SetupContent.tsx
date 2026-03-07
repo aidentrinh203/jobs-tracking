@@ -21,14 +21,14 @@ export function SetupContent() {
             <div className="flex items-center">
               <Image
                 src="/taskosaur-logo.svg"
-                alt="Taskosaur Logo"
+                alt="NAZ3D Logo"
                 width={50}
                 height={50}
                 className={`size-6 lg:size-10 ${
                   resolvedTheme === "light" ? "filter invert brightness-200" : ""
                 }`}
               />
-              <h1 className="setup-brand-title">Taskosaur</h1>
+              <h1 className="setup-brand-title">NAZ3D</h1>
             </div>
           </div>
 
@@ -39,7 +39,7 @@ export function SetupContent() {
           </h2>
 
           <p className="setup-hero-description">
-            Set up your super admin account to unlock the full power of Taskosaur's
+            Set up your super admin account to unlock the full power of NAZ3D's
             AI-powered project management platform for your entire organization.
           </p>
         </motion.div>

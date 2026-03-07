@@ -48,7 +48,7 @@ export default function TermsOfServicePage() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-foreground">1. Acceptance of Terms</h2>
               <p className="text-muted-foreground leading-relaxed">
-                By accessing and using Taskosaur ("the Service"), you accept and agree to be bound
+                By accessing and using NAZ3D ("the Service"), you accept and agree to be bound
                 by the terms and provision of this agreement. If you do not agree to abide by the
                 above, please do not use this service.
               </p>
@@ -57,7 +57,7 @@ export default function TermsOfServicePage() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-foreground">2. Description of Service</h2>
               <p className="text-muted-foreground leading-relaxed">
-                Taskosaur provides a comprehensive project management and collaboration platform
+                NAZ3D provides a comprehensive project management and collaboration platform
                 that includes:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
@@ -146,7 +146,7 @@ export default function TermsOfServicePage() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-foreground">8. Limitation of Liability</h2>
               <p className="text-muted-foreground leading-relaxed">
-                To the maximum extent permitted by law, Taskosaur shall not be liable for any
+                To the maximum extent permitted by law, NAZ3D shall not be liable for any
                 indirect, incidental, special, consequential, or punitive damages, or any loss of
                 profits or revenues, whether incurred directly or indirectly, or any loss of data,
                 use, goodwill, or other intangible losses.
@@ -156,7 +156,7 @@ export default function TermsOfServicePage() {
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-foreground">9. Indemnification</h2>
               <p className="text-muted-foreground leading-relaxed">
-                You agree to indemnify and hold harmless Taskosaur and its affiliates, officers,
+                You agree to indemnify and hold harmless NAZ3D and its affiliates, officers,
                 agents, and employees from any claim or demand, including reasonable attorneys'
                 fees, made by any third party due to or arising out of your use of the Service, your
                 violation of these Terms, or your violation of any rights of another.
@@ -167,7 +167,7 @@ export default function TermsOfServicePage() {
               <h2 className="text-2xl font-semibold text-foreground">10. Governing Law</h2>
               <p className="text-muted-foreground leading-relaxed">
                 These Terms shall be governed by and construed in accordance with the laws of the
-                jurisdiction in which Taskosaur operates, without regard to its conflict of law
+                jurisdiction in which NAZ3D operates, without regard to its conflict of law
                 provisions.
               </p>
             </section>
@@ -194,7 +194,7 @@ export default function TermsOfServicePage() {
 
           <div className="pt-8 border-t">
             <p className="text-center text-sm text-muted-foreground">
-              By using Taskosaur, you acknowledge that you have read and understood these Terms of
+              By using NAZ3D, you acknowledge that you have read and understood these Terms of
               Service and agree to be bound by them.
             </p>
           </div>

@@ -1,8 +1,8 @@
 {
   "name": "@taskosaur/frontend",
   "version": "0.1.0",
-  "description": "Taskosaur Frontend - Next.js Application",
-  "author": "Taskosaur Team",
+  "description": "Naz3D Frontend - Next.js Application",
+  "author": "Naz3D Team",
   "type": "module",
   "private": true,
   "license": "SEE LICENSE IN https://github.com/Taskosaur/Taskosaur/blob/main/LICENSE.md",

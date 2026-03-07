@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
           <div className="prose prose-gray dark:prose-invert max-w-none space-y-6">
             <section className="space-y-4">
               <p className="text-muted-foreground leading-relaxed">
-                At Taskosaur, we take your privacy seriously. This Privacy Policy explains how we
+                At NAZ3D, we take your privacy seriously. This Privacy Policy explains how we
                 collect, use, disclose, and safeguard your information when you use our project
                 management platform.
               </p>
@@ -91,7 +91,7 @@ export default function PrivacyPolicyPage() {
               <div className="space-y-3">
                 <h3 className="text-xl font-medium text-foreground">1.3 Project and Job Data</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  When you use Taskosaur, we store:
+                  When you use NAZ3D, we store:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                   <li>Project names, descriptions, and settings</li>
@@ -315,7 +315,7 @@ export default function PrivacyPolicyPage() {
           <div className="pt-8 border-t">
             <div className="space-y-4">
               <p className="text-center text-sm text-muted-foreground">
-                By using Taskosaur, you acknowledge that you have read and understood this Privacy
+                By using NAZ3D, you acknowledge that you have read and understood this Privacy
                 Policy.
               </p>
               <p className="text-center text-sm text-muted-foreground">

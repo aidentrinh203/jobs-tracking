@@ -19,12 +19,12 @@ export function LoginContent() {
             <div className="flex items-center">
               <Image
                 src="/taskosaur-logo.svg"
-                alt="Taskosaur Logo"
+                alt="NAZ3D Logo"
                 width={50}
                 height={50}
                 className={`size-6 lg:size-10 ${resolvedTheme === "light" ? " filter invert brightness-200" : ""}`}
               />
-              <h1 className="login-brand-title">Taskosaur</h1>
+              <h1 className="login-brand-title">NAZ3D</h1>
             </div>
           </div>
 
