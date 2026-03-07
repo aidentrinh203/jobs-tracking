@@ -153,10 +153,10 @@ export default function Sidebar() {
         disabled: !isAuth,
       },
       {
-        name: "Tasks",
+        name: "Jobs",
         href: "/tasks",
         icon: <HiClipboardList size={16} />,
-        title: "All Tasks",
+        title: "All Jobs",
         disabled: !isAuth,
       },
       {
@@ -215,10 +215,10 @@ export default function Sidebar() {
               disabled: !isAuth,
             },
             {
-              name: "Tasks",
+              name: "Jobs",
               href: `/${currentWorkspaceSlug}/tasks`,
               icon: <HiClipboardList size={16} />,
-              title: "Workspace Tasks",
+              title: "Workspace Jobs",
               disabled: !isAuth,
             },
             // Settings only shown to authenticated users
@@ -249,10 +249,10 @@ export default function Sidebar() {
         disabled: false, // usually for unauthenticated users
       },
       {
-        name: "Tasks",
+        name: "Jobs",
         href: `/${currentWorkspaceSlug || ""}/${currentProjectSlug || ""}/tasks`,
         icon: <HiClipboardList size={16} />,
-        title: "Tasks",
+        title: "Jobs",
         disabled: false,
       },
       {
@@ -297,10 +297,10 @@ export default function Sidebar() {
             disabled: false,
           },
           {
-            name: "Tasks",
+            name: "Jobs",
             href: `/${currentWorkspaceSlug}/${currentProjectSlug}/tasks`,
             icon: <HiClipboardList size={16} />,
-            title: "Tasks",
+            title: "Jobs",
             disabled: false,
           },
           {

@@ -61,7 +61,7 @@ export default function TermsOfServicePage() {
                 that includes:
               </p>
               <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-                <li>Task and project management tools</li>
+                <li>Job and project management tools</li>
                 <li>Team collaboration features</li>
                 <li>Workspace organization capabilities</li>
                 <li>Sprint planning and tracking</li>

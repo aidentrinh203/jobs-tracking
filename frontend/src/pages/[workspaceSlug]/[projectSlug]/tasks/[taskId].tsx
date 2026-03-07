@@ -22,41 +22,41 @@ function TaskDetailContent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchTask = async () => {
-      if (!router.isReady) return;
+  const fetchTask = async () => {
+    if (!router.isReady) return;
 
-      if (!cleanTaskId) {
-        setError("Task ID required");
-        setLoading(false);
-        return;
-      }
+    if (!cleanTaskId) {
+      setError("Job ID required");
+      setLoading(false);
+      return;
+    }
 
-      try {
-        const taskData = await getTaskById(cleanTaskId as string, isAuthenticated());
+    try {
+      const taskData = await getTaskById(cleanTaskId as string, isAuthenticated());
 
-        if (!taskData) {
-          if (!isAuthenticated()) {
-            router.push(`/login?redirect=${encodeURIComponent(router.asPath)}`);
-            return;
-          }
-          setError("Task not found");
-          setLoading(false);
-          return;
-        }
-
-        setTask(taskData);
-        setLoading(false);
-      } catch (err) {
+      if (!taskData) {
         if (!isAuthenticated()) {
           router.push(`/login?redirect=${encodeURIComponent(router.asPath)}`);
           return;
         }
-        setError(err?.message ? err.message : "Failed to load task");
+        setError("Job not found");
         setLoading(false);
+        return;
       }
-    };
 
+      setTask(taskData);
+      setLoading(false);
+    } catch (err) {
+      if (!isAuthenticated()) {
+        router.push(`/login?redirect=${encodeURIComponent(router.asPath)}`);
+        return;
+      }
+      setError(err?.message ? err.message : "Failed to load task");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchTask();
   }, [cleanTaskId, router.isReady, isAuthenticated]);
 
@@ -115,6 +115,7 @@ function TaskDetailContent() {
           workspaceSlug={workspaceSlug as string}
           projectSlug={projectSlug as string}
           taskId={cleanTaskId as string}
+          onTaskRefetch={fetchTask}
         />
       </Suspense>
     </div>

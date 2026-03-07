@@ -48,7 +48,7 @@ export const TimelineHeader: React.FC<TimelineHeaderProps> = ({
         } bg-[var(--muted)] border-r border-[var(--border)] flex items-center px-4 py-3 shrink-0 sticky left-0 z-20`}
         role="columnheader"
       >
-        <span className="text-sm font-semibold text-[var(--foreground)]">Tasks</span>
+        <span className="text-sm font-semibold text-[var(--foreground)]">Jobs</span>
       </div>
       <div className="flex flex-1" role="row">
         {timeRange.days.map((day, index) => {

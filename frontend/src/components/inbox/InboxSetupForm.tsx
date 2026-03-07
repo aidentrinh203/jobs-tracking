@@ -163,7 +163,7 @@ export default function InboxSetupForm({
 
             {/* Task Creation Settings */}
             <div className="space-y-4">
-              <h3 className="text-lg font-medium">Task Creation Settings</h3>
+              <h3 className="text-lg font-medium">Job Creation Settings</h3>
 
               <FormField
                 control={form.control}
@@ -171,9 +171,9 @@ export default function InboxSetupForm({
                 render={({ field }) => (
                   <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                     <div className="space-y-0.5">
-                      <FormLabel className="text-base">Auto-create Tasks</FormLabel>
+                      <FormLabel className="text-base">Auto-create Jobs</FormLabel>
                       <FormDescription>
-                        Automatically convert incoming emails to tasks
+                        Automatically convert incoming emails to jobs
                       </FormDescription>
                     </div>
                     <FormControl>
@@ -193,7 +193,7 @@ export default function InboxSetupForm({
                   name="defaultTaskType"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Default Task Type</FormLabel>
+                      <FormLabel>Default Job Type</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}

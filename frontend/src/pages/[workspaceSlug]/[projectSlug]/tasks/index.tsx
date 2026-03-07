@@ -264,7 +264,7 @@ function ProjectTasksContent() {
       try {
         setAddTaskPriorities(TaskPriorities || []);
       } catch (error) {
-        console.error("Failed to fetch priorities for Add Task row:", error);
+        console.error("Failed to fetch priorities for Add Job row:", error);
         setAddTaskPriorities([]);
       }
     };

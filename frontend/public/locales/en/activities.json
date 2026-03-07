@@ -4,7 +4,7 @@
   "workspace_description": "Recent activity and updates in the \"{{workspaceName}}\" workspace",
   "filters": {
     "all": "All Activity",
-    "tasks": "Tasks",
+    "tasks": "Jobs",
     "projects": "Projects",
     "workspaces": "Workspaces",
     "users": "Users",

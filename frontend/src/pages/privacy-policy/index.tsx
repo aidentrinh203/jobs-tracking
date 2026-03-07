@@ -89,13 +89,13 @@ export default function PrivacyPolicyPage() {
               </div>
 
               <div className="space-y-3">
-                <h3 className="text-xl font-medium text-foreground">1.3 Project and Task Data</h3>
+                <h3 className="text-xl font-medium text-foreground">1.3 Project and Job Data</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   When you use Taskosaur, we store:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
                   <li>Project names, descriptions, and settings</li>
-                  <li>Task details, assignments, and status updates</li>
+                  <li>Job details, assignments, and status updates</li>
                   <li>Comments and attachments</li>
                   <li>Sprint and workflow configurations</li>
                   <li>Team member roles and permissions</li>

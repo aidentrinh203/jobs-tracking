@@ -314,7 +314,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
 
       const newTask = await createTaskWithAttachements(taskData);
 
-      toast.success(`Task named ${newTask.title} created successfully!`);
+      toast.success(`Job named ${newTask.title} created successfully!`);
       router.back();
     } catch (error: any) {
       toast.error(error?.message || "Error creating task");
@@ -335,7 +335,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="title">
-                    Task Title <span className="projects-form-label-required">*</span>
+                    Job Title <span className="projects-form-label-required">*</span>
                   </Label>
                   <Input
                     id="title"
@@ -488,7 +488,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
 
           <Card className="border-none bg-[var(--card)] gap-0 rounded-md">
             <CardHeader>
-              <TaskSectionHeader icon={HiCog} title="Task Configuration" />
+              <TaskSectionHeader icon={HiCog} title="Job Configuration" />
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
@@ -554,7 +554,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
 
               <div className="space-y-2">
                 <Label htmlFor="type">
-                  Task Type <span className="projects-form-label-required">*</span>
+                  Job Type <span className="projects-form-label-required">*</span>
                 </Label>
                 <Select
                   value={formData.type || "TASK"}
@@ -586,7 +586,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
               {formData.type === "SUBTASK" && (
                 <div className="space-y-2">
                   <Label htmlFor="parentTask">
-                    Parent Task <span className="projects-form-label-required">*</span>
+                    Parent Job <span className="projects-form-label-required">*</span>
                   </Label>
                   <Popover open={openParentTask} onOpenChange={setOpenParentTask}>
                     <PopoverTrigger asChild>

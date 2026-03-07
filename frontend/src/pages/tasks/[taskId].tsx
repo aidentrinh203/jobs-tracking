@@ -22,7 +22,7 @@ function TaskDetailContent() {
   const fetchData = async () => {
     try {
       const taskData = await getTaskById(cleanTaskId as string, isAuthenticated());
-      if (!taskData) throw new Error("Task not found");
+      if (!taskData) throw new Error("Job not found");
 
       const enhancedTask = {
         ...taskData,
@@ -87,7 +87,7 @@ function TaskDetailContent() {
 
   return (
     <Suspense fallback={<div className="p-4"><div className="animate-pulse h-96 bg-[var(--muted)] rounded"></div></div>}>
-      <TaskDetailClient task={task} taskId={cleanTaskId as string} />
+      <TaskDetailClient task={task} taskId={cleanTaskId as string} onTaskRefetch={fetchData} />
     </Suspense>
   );
 }

@@ -15,8 +15,8 @@ const chartConfig = {
   low: { label: "Low Workload", color: "#10B981" },
   medium: { label: "Medium Workload", color: "#F59E0B" },
   high: { label: "High Workload", color: "#EF4444" },
-  assigned: { label: "Assigned Tasks", color: "#3B82F6" },
-  reported: { label: "Reported Tasks", color: "#8B5CF6" },
+  assigned: { label: "Assigned Jobs", color: "#3B82F6" },
+  reported: { label: "Reported Jobs", color: "#8B5CF6" },
 };
 
 interface MemberWorkloadChartProps {
@@ -36,8 +36,8 @@ const CustomTooltip = ({ active, payload }: any) => {
     return (
       <div className="border-0 bg-[var(--accent)] p-3 border-gray-200 rounded-lg shadow-md">
         <p className="font-semibold">{data.memberName}</p>
-        <p className="text-sm text-blue-600">{`Assigned Tasks: ${data.activeTasks}`}</p>
-        <p className="text-sm text-purple-600">{`Reported Tasks: ${data.reportedTasks}`}</p>
+        <p className="text-sm text-blue-600">{`Assigned Jobs: ${data.activeTasks}`}</p>
+        <p className="text-sm text-purple-600">{`Reported Jobs: ${data.reportedTasks}`}</p>
         <p className="text-sm text-gray-500">
           {`Workload: ${data.activeTasks > 10 ? "High" : data.activeTasks > 5 ? "Medium" : "Low"}`}
         </p>

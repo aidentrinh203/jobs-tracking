@@ -988,7 +988,7 @@ const TaskTable: React.FC<TaskTableProps> = ({
         await onTaskRefetch();
       }
 
-      toast.success("Task created successfully!");
+      toast.success("Job created successfully!");
     } catch (error) {
       console.error("Failed to create task:", error);
       toast.error("Failed to create task. Please try again.");

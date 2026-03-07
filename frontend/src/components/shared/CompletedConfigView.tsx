@@ -332,7 +332,7 @@ export default function CompletedConfigView({
             <div className="flex items-center justify-between">
               <div>
                 <Label className="pb-2 cursor-pointer text-sm font-medium" htmlFor="autoCreateTask">
-                  Auto-create Tasks
+                  Auto-create Jobs
                 </Label>
                 <p className="text-sm text-[var(--muted-foreground)]/60">
                   Automatically convert incoming emails to tasks

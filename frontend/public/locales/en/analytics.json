@@ -19,7 +19,7 @@
     },
     "task_type_distribution": {
       "title": "Task Type Distribution",
-      "description": "Types of tasks in this project",
+      "description": "Types of jobs in this project",
       "types": {
         "story": "Story",
         "task": "Task",
@@ -30,7 +30,7 @@
     },
     "task_priority_distribution": {
       "title": "Task Priority Distribution",
-      "description": "Priority breakdown of project tasks",
+      "description": "Priority breakdown of project jobs",
       "count": "Count",
       "priorities": {
         "lowest": "Lowest",
@@ -50,13 +50,13 @@
   },
   "kpi": {
     "total_tasks": {
-      "title": "Total Tasks",
-      "label": "Tasks",
-      "description": "All tasks in project"
+      "title": "Total Jobs",
+      "label": "Jobs",
+      "description": "All jobs in project"
     },
     "completed_tasks": {
-      "title": "Completed Tasks",
-      "label": "Completed Tasks",
+      "title": "Completed Jobs",
+      "label": "Completed Jobs",
       "description": "Successfully finished"
     },
     "active_sprints": {
