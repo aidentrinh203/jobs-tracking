@@ -6,6 +6,8 @@ import DropdownAction from "@/components/common/DropdownAction";
 import { UpdateTaskRequest } from "@/types/task-dto";
 import TaskAttachments from "./TaskAttachment";
 import TaskLabels from "./TaskLabels";
+import TaskActivities from "./TaskActivities";
+import TimeTracking from "./TimeTracking";
 import { useTask } from "@/contexts/task-context";
 import { useProjectContext } from "@/contexts/project-context";
 import { useSprint } from "@/contexts/sprint-context";
@@ -18,6 +20,8 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { HiPencil, HiTrash, HiGlobeAlt } from "react-icons/hi2";
 import { PriorityBadge } from "@/components/badges/PriorityBadge";
+import api from "@/lib/api";
+import { TimeEntry } from "@/types/tasks";
 import { StatusBadge } from "@/components/badges/StatusBadge";
 import { Input } from "@/components/ui/input";
 import TaskDescription from "@/components/tasks/views/TaskDescription";
@@ -26,7 +30,6 @@ import Tooltip from "../common/ToolTip";
 import ConfirmationModal from "../modals/ConfirmationModal";
 import { Badge } from "../ui";
 import { useWorkspaceContext } from "@/contexts/workspace-context";
-import TaskActivities from "./TaskActivities";
 import ShareTaskDialog from "./ShareTaskDialog";
 import { TaskPriorities } from "@/utils/data/taskData";
 import { formatDateForApi } from "@/utils/handleDateChange";
@@ -987,6 +990,65 @@ export default function TaskDetailClient({
 
   const isInitialLoading = !initialLoadComplete || !minLoadTimeElapsed;
 
+  // Time tracking handlers
+  const handleLogTime = async (timeEntry: Omit<TimeEntry, "id" | "createdAt" | "updatedAt">) => {
+    try {
+      if (!currentUser?.id) {
+        toast.error(t("detail.loginRequired"));
+        return;
+      }
+
+      await api.post("/time-entries", {
+        ...timeEntry,
+        taskId: taskId,
+        userId: currentUser.id,
+      });
+
+      toast.success(t("detail.timeLogSuccess") || "Time logged successfully");
+      onTaskRefetch && onTaskRefetch();
+    } catch (error) {
+      console.error("Failed to log time:", error);
+      const errorMessage = (error as any)?.response?.data?.message || (error as any)?.message;
+      toast.error(errorMessage || t("detail.timeLogError") || "Failed to log time");
+    }
+  };
+
+  const handleUpdateTime = async (timeEntryId: string, timeEntry: Partial<TimeEntry>) => {
+    try {
+      if (!currentUser?.id) {
+        toast.error(t("detail.loginRequired"));
+        return;
+      }
+
+      await api.patch(`/time-entries/${timeEntryId}?requestUserId=${currentUser.id}`, timeEntry);
+
+      toast.success(t("detail.timeUpdateSuccess") || "Time entry updated successfully");
+      onTaskRefetch && onTaskRefetch();
+    } catch (error) {
+      console.error("Failed to update time entry:", error);
+      const errorMessage = (error as any)?.response?.data?.message || (error as any)?.message;
+      toast.error(errorMessage || t("detail.timeUpdateError") || "Failed to update time entry");
+    }
+  };
+
+  const handleDeleteTime = async (timeEntryId: string) => {
+    try {
+      if (!currentUser?.id) {
+        toast.error(t("detail.loginRequired"));
+        return;
+      }
+
+      await api.delete(`/time-entries/${timeEntryId}?requestUserId=${currentUser.id}`);
+
+      toast.success(t("detail.timeDeleteSuccess") || "Time entry deleted successfully");
+      onTaskRefetch && onTaskRefetch();
+    } catch (error) {
+      console.error("Failed to delete time entry:", error);
+      const errorMessage = (error as any)?.response?.data?.message || (error as any)?.message;
+      toast.error(errorMessage || t("detail.timeDeleteError") || "Failed to delete time entry");
+    }
+  };
+
   if (isInitialLoading) {
     return <TaskDetailSkeleton />;
   }
@@ -1151,6 +1213,15 @@ export default function TaskDetailClient({
                 />
               </div>
             )}
+
+            <div className="">
+              <TimeTracking
+                task={task}
+                onLogTime={handleLogTime}
+                onUpdateTime={handleUpdateTime}
+                onDeleteTime={handleDeleteTime}
+              />
+            </div>
 
             <div className="">
               <TaskComments
