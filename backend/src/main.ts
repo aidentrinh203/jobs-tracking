@@ -34,19 +34,22 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   const appConfig = configService.get('app');
-  // Enable CORS
+  // Enable CORS (minimal config - nginx handles most routing)
+  // Kept for direct API access scenarios and development flexibility
   app.enableCors({
     origin: process.env.CORS_ORIGINS
       ? process.env.CORS_ORIGINS.split(',')
-      : [
-          'http://localhost:3000',
-          'http://localhost:3001',
-          'http://0.0.0.0:3000',
-          'http://0.0.0.0:3001',
-          'http://127.0.0.1:3000',
-        ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+      : true, // Allow all origins when behind nginx proxy
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'X-Requested-With',
+      'Accept',
+      'Origin',
+    ],
+    exposedHeaders: ['Content-Disposition'],
   });
 
   // Enable ValidationPipe globally
