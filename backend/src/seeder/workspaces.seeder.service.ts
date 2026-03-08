@@ -73,96 +73,12 @@ export class WorkspacesSeederService {
   }
 
   private getWorkspacesDataForOrganization(organization: any) {
-    // Different workspace configurations based on organization
-    if (organization.slug === 'taskosaur-inc') {
-      return [
-        {
-          name: 'Development Team',
-          slug: 'dev-team',
-          description: 'Main development workspace for product engineering',
-          color: '#3b82f6',
-          avatar: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=150',
-          settings: {
-            allowExternalGuests: false,
-            defaultProjectVisibility: 'private',
-            enableTimeTracking: true,
-            enableGitIntegration: true,
-            workflowType: 'scrum',
-            sprintDuration: 14,
-          },
-        },
-        {
-          name: 'Design & UX',
-          slug: 'design-ux',
-          description: 'Creative workspace for design and user experience teams',
-          color: '#8b5cf6',
-          avatar: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=150',
-          settings: {
-            allowExternalGuests: true,
-            defaultProjectVisibility: 'internal',
-            enableTimeTracking: false,
-            enableGitIntegration: false,
-            workflowType: 'kanban',
-            sprintDuration: null,
-          },
-        },
-        {
-          name: 'Marketing',
-          slug: 'marketing',
-          description: 'Marketing campaigns and content creation workspace',
-          color: '#f59e0b',
-          avatar: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=150',
-          settings: {
-            allowExternalGuests: true,
-            defaultProjectVisibility: 'internal',
-            enableTimeTracking: true,
-            enableGitIntegration: false,
-            workflowType: 'kanban',
-            sprintDuration: null,
-          },
-        },
-      ];
-    } else if (organization.slug === 'tech-innovators') {
-      return [
-        {
-          name: 'Client Projects',
-          slug: 'client-projects',
-          description: 'Workspace for managing client deliverables and projects',
-          color: '#10b981',
-          avatar: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=150',
-          settings: {
-            allowExternalGuests: true,
-            defaultProjectVisibility: 'private',
-            enableTimeTracking: true,
-            enableGitIntegration: true,
-            workflowType: 'scrum',
-            sprintDuration: 7,
-          },
-        },
-        {
-          name: 'Internal Operations',
-          slug: 'internal-ops',
-          description: 'Internal processes, HR, and administrative tasks',
-          color: '#6b7280',
-          avatar: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=150',
-          settings: {
-            allowExternalGuests: false,
-            defaultProjectVisibility: 'internal',
-            enableTimeTracking: false,
-            enableGitIntegration: false,
-            workflowType: 'kanban',
-            sprintDuration: null,
-          },
-        },
-      ];
-    }
-
     // Default workspace for any other organization
     return [
       {
-        name: 'General',
-        slug: 'general',
-        description: 'Default workspace for general project management',
+        name: 'NAZ 3D',
+        slug: 'workspace',
+        description: 'Construction & Architecture',
         color: '#6b7280',
         settings: {
           allowExternalGuests: false,

@@ -130,38 +130,37 @@ export class ProjectsSeederService {
   }
 
   private getProjectsDataForWorkspace(workspace: any) {
-    // Different project configurations based on workspace
-    if (workspace.slug === 'dev-team') {
-      return [
+    // Default project for any other workspace
+    return [
         {
-          name: 'Taskosaur Web Application',
+          name: 'Charles Turner',
           description:
-            'Main web application built with React, TypeScript, and modern UI components. Includes user management, task tracking, and collaboration features.',
+            '2782 S.Perkins Street, New York, NY 10001\n(212) 555-1234',
           color: '#3b82f6',
           status: ProjectStatus.ACTIVE,
           priority: ProjectPriority.HIGH,
-          startDate: new Date('2024-01-15'),
-          endDate: new Date('2024-08-30'),
+          startDate: new Date('2025-12-8'),
+          endDate: new Date('2026-01-30'),
           avatar: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150',
           settings: {
             enableTimeTracking: true,
             enableSubtasks: true,
             enableDependencies: true,
-            defaultTaskType: 'STORY',
-            estimationUnit: 'story_points',
+            defaultTaskType: 'TASK',
+            estimationUnit: 'hours',
             allowGuestAccess: false,
             requireApprovalForCompletion: true,
           },
         },
         {
-          name: 'Backend API Services',
+          name: 'Brett Ryan #1',
           description:
-            'RESTful API backend services built with NestJS, PostgreSQL, and Redis. Handles authentication, data management, and third-party integrations.',
+            '2071 S Pine Aire Dr, Los Angeles, CA 90025\n(310) 555-5678',
           color: '#10b981',
           status: ProjectStatus.ACTIVE,
           priority: ProjectPriority.HIGH,
-          startDate: new Date('2024-01-01'),
-          endDate: new Date('2024-07-15'),
+          startDate: new Date('2025-12-8'),
+          endDate: new Date('2026-01-30'),
           avatar: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=150',
           settings: {
             enableTimeTracking: true,
@@ -170,22 +169,22 @@ export class ProjectsSeederService {
             defaultTaskType: 'TASK',
             estimationUnit: 'hours',
             allowGuestAccess: false,
-            requireApprovalForCompletion: false,
+            requireApprovalForCompletion: true,
           },
         },
         {
-          name: 'DevOps Infrastructure',
+          name: 'Adrew Rodgers (Pine Cone)',
           description:
-            'Cloud infrastructure, CI/CD pipelines, monitoring, and deployment automation using AWS, Docker, and Kubernetes.',
+            '3789 E.Pine Cone Dr.Williams, AZ 86046\n(928) 555-9012',
           color: '#f59e0b',
           status: ProjectStatus.ACTIVE,
           priority: ProjectPriority.MEDIUM,
-          startDate: new Date('2024-02-01'),
-          endDate: new Date('2024-06-30'),
+          startDate: new Date('2025-12-8'),
+          endDate: new Date('2026-01-30'),
           avatar: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=150',
           settings: {
-            enableTimeTracking: false,
-            enableSubtasks: false,
+            enableTimeTracking: true,
+            enableSubtasks: true,
             enableDependencies: true,
             defaultTaskType: 'TASK',
             estimationUnit: 'hours',
@@ -194,161 +193,6 @@ export class ProjectsSeederService {
           },
         },
       ];
-    } else if (workspace.slug === 'design-ux') {
-      return [
-        {
-          name: 'UI Design System',
-          description:
-            'Comprehensive design system with components, patterns, and guidelines for consistent user experience across all products.',
-          color: '#8b5cf6',
-          status: ProjectStatus.ACTIVE,
-          priority: ProjectPriority.MEDIUM,
-          startDate: new Date('2024-01-20'),
-          endDate: new Date('2024-05-15'),
-          avatar: 'https://images.unsplash.com/photo-1545670723-196ed0954986?w=150',
-          settings: {
-            enableTimeTracking: false,
-            enableSubtasks: true,
-            enableDependencies: false,
-            defaultTaskType: 'TASK',
-            estimationUnit: 'story_points',
-            allowGuestAccess: true,
-            requireApprovalForCompletion: true,
-          },
-        },
-        {
-          name: 'User Research & Testing',
-          description:
-            'User research initiatives, usability testing, and feedback collection to inform product decisions.',
-          color: '#ec4899',
-          status: ProjectStatus.PLANNING,
-          priority: ProjectPriority.LOW,
-          startDate: new Date('2024-03-01'),
-          endDate: new Date('2024-12-31'),
-          avatar: 'https://images.unsplash.com/photo-1553028826-f4804151e2e2?w=150',
-          settings: {
-            enableTimeTracking: true,
-            enableSubtasks: false,
-            enableDependencies: false,
-            defaultTaskType: 'TASK',
-            estimationUnit: 'hours',
-            allowGuestAccess: true,
-            requireApprovalForCompletion: false,
-          },
-        },
-      ];
-    } else if (workspace.slug === 'marketing') {
-      return [
-        {
-          name: 'Product Launch Campaign',
-          description:
-            'Comprehensive marketing campaign for product launch including content creation, social media, and promotional activities.',
-          color: '#f59e0b',
-          status: ProjectStatus.ACTIVE,
-          priority: ProjectPriority.HIGH,
-          startDate: new Date('2024-02-15'),
-          endDate: new Date('2024-06-01'),
-          avatar: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=150',
-          settings: {
-            enableTimeTracking: true,
-            enableSubtasks: true,
-            enableDependencies: false,
-            defaultTaskType: 'TASK',
-            estimationUnit: 'hours',
-            allowGuestAccess: true,
-            requireApprovalForCompletion: true,
-          },
-        },
-      ];
-    } else if (workspace.slug === 'client-projects') {
-      return [
-        {
-          name: 'E-commerce Platform - TechCorp',
-          description:
-            'Custom e-commerce platform development for TechCorp client with advanced inventory management and analytics.',
-          color: '#059669',
-          status: ProjectStatus.ACTIVE,
-          priority: ProjectPriority.HIGH,
-          startDate: new Date('2024-01-10'),
-          endDate: new Date('2024-04-30'),
-          avatar: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=150',
-          settings: {
-            enableTimeTracking: true,
-            enableSubtasks: true,
-            enableDependencies: true,
-            defaultTaskType: 'STORY',
-            estimationUnit: 'hours',
-            allowGuestAccess: true,
-            requireApprovalForCompletion: true,
-          },
-        },
-        {
-          name: 'Mobile App - FinanceFlow',
-          description:
-            'React Native mobile application for personal finance management with real-time synchronization and reporting.',
-          color: '#3730a3',
-          status: ProjectStatus.PLANNING,
-          priority: ProjectPriority.MEDIUM,
-          startDate: new Date('2024-03-15'),
-          endDate: new Date('2024-08-15'),
-          avatar: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=150',
-          settings: {
-            enableTimeTracking: true,
-            enableSubtasks: true,
-            enableDependencies: true,
-            defaultTaskType: 'STORY',
-            estimationUnit: 'story_points',
-            allowGuestAccess: true,
-            requireApprovalForCompletion: false,
-          },
-        },
-      ];
-    } else if (workspace.slug === 'internal-ops') {
-      return [
-        {
-          name: 'HR Process Automation',
-          description:
-            'Streamline HR processes including employee onboarding, performance reviews, and leave management.',
-          color: '#6b7280',
-          status: ProjectStatus.ON_HOLD,
-          priority: ProjectPriority.LOW,
-          startDate: new Date('2024-04-01'),
-          endDate: new Date('2024-09-30'),
-          avatar: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=150',
-          settings: {
-            enableTimeTracking: false,
-            enableSubtasks: false,
-            enableDependencies: false,
-            defaultTaskType: 'TASK',
-            estimationUnit: 'hours',
-            allowGuestAccess: false,
-            requireApprovalForCompletion: true,
-          },
-        },
-      ];
-    }
-
-    // Default project for any other workspace
-    return [
-      {
-        name: 'General Tasks',
-        description: 'General project for miscellaneous tasks and activities',
-        color: '#6b7280',
-        status: ProjectStatus.ACTIVE,
-        priority: ProjectPriority.MEDIUM,
-        startDate: new Date(),
-        endDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000), // 90 days from now
-        settings: {
-          enableTimeTracking: true,
-          enableSubtasks: false,
-          enableDependencies: false,
-          defaultTaskType: 'TASK',
-          estimationUnit: 'hours',
-          allowGuestAccess: false,
-          requireApprovalForCompletion: false,
-        },
-      },
-    ];
   }
 
   private async addMembersToProject(projectId: string, users: any[], workspaceId: string) {
