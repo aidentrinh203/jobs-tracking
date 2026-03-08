@@ -176,7 +176,7 @@ export default function NotificationScreen({ userId, organizationId }: Notificat
         } else if (entityType === "project" && entityId) {
           router.push(`/projects/${entityId}`);
         } else {
-          router.push("/dashboard");
+          router.push("/workspace");
         }
         break;
 
@@ -185,7 +185,7 @@ export default function NotificationScreen({ userId, organizationId }: Notificat
         break;
 
       default:
-        router.push("/dashboard");
+        router.push("/workspace");
     }
   };
 

@@ -50,7 +50,7 @@ export function LoginForm() {
 
     try {
       await login({ email: formData.email, password: formData.password });
-      router.push("/dashboard");
+      router.push("/workspace");
     } catch (err) {
       setError("Invalid email or password. Please try again.");
       console.error(err);

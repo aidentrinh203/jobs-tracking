@@ -390,9 +390,9 @@ export default function Header() {
           {/* Right Section - Actions & User Menu */}
           <div className="header-right">
             <div className="hidden min-[531px]:contents">
-              <div className="header-center">
+              {/* <div className="header-center">
                 {hasOrganizationAccess && <OrganizationSelector />}
-              </div>
+              </div> */}
 
               {hasOrganizationAccess && (
                 <>

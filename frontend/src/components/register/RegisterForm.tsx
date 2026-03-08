@@ -118,7 +118,7 @@ export function RegisterForm() {
       const response = await register(userData);
 
       if (response.access_token) {
-        router.push("/dashboard");
+        router.push("/workspace");
       } else {
         router.push("/login?message=Registration successful! Please log in.");
       }

@@ -93,7 +93,7 @@ export function SetupForm() {
       const response = await authApi.setupSuperAdmin(formData);
 
       if (response.access_token) {
-        router.push("/dashboard");
+        router.push("/workspace");
       } else {
         router.push("/login?message=Registration successful! Please log in.");
       }

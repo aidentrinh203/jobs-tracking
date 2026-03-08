@@ -131,53 +131,53 @@ export default function Sidebar() {
 
   const globalNavItems = useMemo(
     () => [
-      {
-        name: "Dashboard",
-        href: "/dashboard",
-        icon: <HiHome size={16} />,
-        title: "Global Dashboard",
-        disabled: !isAuth,
-      },
-      {
-        name: "Workspaces",
-        href: "/workspaces",
-        icon: <HiViewGrid size={16} />,
-        title: "All Workspaces",
-        disabled: !isAuth,
-      },
-      {
-        name: "Projects",
-        href: "/projects",
-        icon: <HiViewBoards size={16} />,
-        title: "All Projects",
-        disabled: !isAuth,
-      },
-      {
-        name: "Jobs",
-        href: "/tasks",
-        icon: <HiClipboardList size={16} />,
-        title: "All Jobs",
-        disabled: !isAuth,
-      },
-      {
-        name: "Activities",
-        href: "/activities",
-        icon: <HiCalendar size={16} />,
-        title: "All Activities",
-        disabled: !isAuth,
-      },
-      // Settings only shown to authenticated users
-      ...(isAuth
-        ? [
-            {
-              name: "Settings",
-              href: "/settings",
-              icon: <HiCog size={16} />,
-              title: "All Settings",
-              disabled: false,
-            },
-          ]
-        : []),
+    //   {
+    //     name: "Dashboard",
+    //     href: "/workspace",
+    //     icon: <HiHome size={16} />,
+    //     title: "Workspace Dashboard",
+    //     disabled: !isAuth,
+    //   },
+    //   {
+    //     name: "Workspaces",
+    //     href: "/workspaces",
+    //     icon: <HiViewGrid size={16} />,
+    //     title: "All Workspaces",
+    //     disabled: !isAuth,
+    //   },
+    //   {
+    //     name: "Projects",
+    //     href: "/projects",
+    //     icon: <HiViewBoards size={16} />,
+    //     title: "All Projects",
+    //     disabled: !isAuth,
+    //   },
+    //   {
+    //     name: "Jobs",
+    //     href: "/tasks",
+    //     icon: <HiClipboardList size={16} />,
+    //     title: "All Jobs",
+    //     disabled: !isAuth,
+    //   },
+    //   {
+    //     name: "Activities",
+    //     href: "/activities",
+    //     icon: <HiCalendar size={16} />,
+    //     title: "All Activities",
+    //     disabled: !isAuth,
+    //   },
+    //   // Settings only shown to authenticated users
+    //   ...(isAuth
+    //     ? [
+    //         {
+    //           name: "Settings",
+    //           href: "/settings",
+    //           icon: <HiCog size={16} />,
+    //           title: "All Settings",
+    //           disabled: false,
+    //         },
+    //       ]
+    //     : []),
     ],
     [isAuth]
   );
@@ -380,7 +380,7 @@ export default function Sidebar() {
     }
 
     if (isSidebarCollapsed) {
-      setMiniPathName("/dashboard");
+      setMiniPathName("/workspace");
       return globalNavItems;
     }
     return [];
