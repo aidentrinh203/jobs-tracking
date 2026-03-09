@@ -11,7 +11,7 @@ interface AuthRedirectProps {
 
 export default function AuthRedirect({
   children,
-  redirectTo = async () => "/dashboard",
+  redirectTo = async () => "/workspace",
   requireAuth = true,
 }: AuthRedirectProps) {
   const {

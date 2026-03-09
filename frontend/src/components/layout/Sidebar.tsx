@@ -255,13 +255,13 @@ export default function Sidebar() {
         title: "Jobs",
         disabled: false,
       },
-      {
-        name: "Sprints",
-        href: `/${currentWorkspaceSlug || ""}/${currentProjectSlug || ""}/sprints`,
-        icon: <HiLightningBolt size={16} />,
-        title: "Sprints",
-        disabled: false,
-      },
+      // {
+      //   name: "Sprints",
+      //   href: `/${currentWorkspaceSlug || ""}/${currentProjectSlug || ""}/sprints`,
+      //   icon: <HiLightningBolt size={16} />,
+      //   title: "Sprints",
+      //   disabled: false,
+      // },
       // {
       //   name: "Calendar",
       //   href: `/${currentWorkspaceSlug || ""}/${currentProjectSlug || ""}/calendar`,
@@ -303,13 +303,13 @@ export default function Sidebar() {
             title: "Jobs",
             disabled: false,
           },
-          {
-            name: "Sprints",
-            href: `/${currentWorkspaceSlug}/${currentProjectSlug}/sprints`,
-            icon: <HiLightningBolt size={16} />,
-            title: "Sprints",
-            disabled: false,
-          },
+          // {
+          //   name: "Sprints",
+          //   href: `/${currentWorkspaceSlug}/${currentProjectSlug}/sprints`,
+          //   icon: <HiLightningBolt size={16} />,
+          //   title: "Sprints",
+          //   disabled: false,
+          // },
           {
             name: "Calendar",
             href: `/${currentWorkspaceSlug}/${currentProjectSlug}/calendar`,
