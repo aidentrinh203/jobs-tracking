@@ -63,6 +63,10 @@ function sanitizeSlug(slug: string | string[] | undefined): string {
   return slug;
 }
 
+// Feature flags
+const ENABLE_SPRINTS = false; // Set to true to enable sprint functionality
+const ENABLE_RECURRENCE = false; // Set to true to enable task recurrence functionality
+
 interface TaskDetailClientProps {
   task: any;
   taskId: string;
@@ -1400,6 +1404,7 @@ export default function TaskDetailClient({
                 </div>
 
                 {/* Sprint */}
+                {ENABLE_SPRINTS && (
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <Label className="text-sm">{t("detail.sprint")}</Label>
@@ -1548,6 +1553,7 @@ export default function TaskDetailClient({
                     )}
                   </div>
                 </div>
+                )}
 
                 {/* Priority */}
                 <div>
@@ -1890,7 +1896,7 @@ export default function TaskDetailClient({
             </div>
 
             {/* Recurring Details */}
-            {task.isRecurring && task.recurringConfig && (
+            {ENABLE_RECURRENCE && task.isRecurring && task.recurringConfig && (
               <>
                 <Divider label={t("detail.recurrence")} />
                 <div className="space-y-4">
@@ -2046,7 +2052,7 @@ export default function TaskDetailClient({
             )}
 
             {/* Add Recurrence for non-recurring tasks */}
-            {!task.isRecurring && hasAccess && (
+            {ENABLE_RECURRENCE && !task.isRecurring && hasAccess && (
               <>
                 <Divider label={t("detail.recurrence")} />
                 <div className="space-y-4">
