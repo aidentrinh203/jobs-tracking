@@ -278,6 +278,8 @@ model Task {
   storyPoints       Int?         @map("story_points")
   originalEstimate  Int?         @map("original_estimate")
   remainingEstimate Int?         @map("remaining_estimate")
+  price             Float?
+  feet2             Float?
   customFields      Json?        @map("custom_fields")
   projectId         String       @map("project_id") @db.Uuid
   statusId          String       @map("status_id") @db.Uuid

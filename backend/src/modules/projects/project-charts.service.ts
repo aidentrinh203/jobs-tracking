@@ -231,9 +231,9 @@ export class ProjectChartsService {
           status: 'ACTIVE',
         },
       }),
-      this.prisma.task.count({ where: { ...taskWhere, type: 'BUG' } }),
+      this.prisma.task.count({ where: { ...taskWhere, type: 'SUBTASK' } }),
       this.prisma.task.count({
-        where: { ...taskWhere, type: 'BUG', completedAt: { not: null } },
+        where: { ...taskWhere, type: 'SUBTASK', completedAt: { not: null } },
       }),
     ]);
 

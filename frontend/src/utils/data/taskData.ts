@@ -64,11 +64,11 @@ export const PRIORITY_OPTIONS = [
 ];
 
 export const TASK_TYPE_OPTIONS = [
-  { value: "TASK", label: "Task" },
-  { value: "BUG", label: "Bug" },
-  { value: "EPIC", label: "Epic" },
-  { value: "STORY", label: "Story" },
-  { value: "SUBTASK", label: "Subtask" },
+  { value: "TASK", label: "Drafting" },
+  { value: "BUG", label: "Truss Design" },
+  { value: "EPIC", label: "Takeoff Estimating" },
+  { value: "STORY", label: "BIM Modeling" },
+  { value: "SUBTASK", label: "Revision" },
 ];
 
 export const DEFAULT_SORT_FIELDS = [
@@ -86,10 +86,10 @@ export const DEFAULT_SORT_FIELDS = [
 ];
 
 export const TaskTypeIcon = {
-  TASK: { label: "Task", icon: HiOutlineClipboard, color: "blue-500" },
-  STORY: { label: "Story", icon: HiOutlineLightBulb, color: "green-500" },
-  BUG: { label: "Bug", icon: HiOutlineBugAnt, color: "red-500" },
-  EPIC: { label: "Epic", icon: HiOutlineSparkles, color: "purple-500" },
+  TASK: { label: "Drafting", icon: HiOutlineClipboard, color: "blue-500" },
+  STORY: { label: "BIM Modeling", icon: HiOutlineLightBulb, color: "green-500" },
+  BUG: { label: "Truss Design", icon: HiOutlineBugAnt, color: "red-500" },
+  EPIC: { label: "Takeoff Estimating", icon: HiOutlineSparkles, color: "purple-500" },
   SUBTASK: { label: "Subtask", icon: HiOutlineViewList, color: "orange-500" },
 } as const;
 

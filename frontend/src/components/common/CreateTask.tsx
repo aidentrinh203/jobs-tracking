@@ -17,7 +17,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 import TaskDescription from "@/components/tasks/views/TaskDescription";
 import { useTask } from "@/contexts/task-context";
-import { TaskPriorities } from "@/utils/data/taskData";
+import { TaskPriorities, TASK_TYPE_OPTIONS } from "@/utils/data/taskData";
 import { toast } from "sonner";
 import router from "next/router";
 import ActionButton from "./ActionButton";
@@ -43,6 +43,11 @@ const TaskSectionHeader = ({ icon: Icon, title }: { icon: any; title: string }) 
 );
 
 export default function CreateTask({ projectSlug, workspace, projects }: CreateTaskProps) {
+  // Feature flags for enabling/disabling features
+  const ENABLE_SPRINTS = false;
+  const ENABLE_RECURRENCE = false;
+  const ENABLE_STORY_POINTS = false;
+
   const { createTaskWithAttachements } = useTask();
   const { getProjectMembers, getTaskStatusByProject } = useProject();
   const { getSprintsByProject, getActiveSprint } = useSprint();
@@ -60,6 +65,8 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
     priority: "MEDIUM",
     type: "TASK",
     storyPoints: "",
+    price: "",
+    feet2: "",
     startDate: "",
     dueDate: "",
     sprintId: "",
@@ -221,7 +228,9 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
     if (selectedProject?.id) {
       fetchProjectMembers(selectedProject.id);
       fetchProjectStatuses(selectedProject.id);
-      fetchProjectSprints(selectedProject.id);
+      if (ENABLE_SPRINTS) {
+        fetchProjectSprints(selectedProject.id);
+      }
     } else {
       setMembers([]);
       setAvailableStatuses([]);
@@ -288,6 +297,8 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
         priority: formData.priority.toUpperCase() as "LOW" | "MEDIUM" | "HIGH" | "HIGHEST",
         type: formData.type as "TASK" | "BUG" | "EPIC" | "STORY" | "SUBTASK",
         storyPoints: formData.storyPoints ? parseInt(formData.storyPoints) : undefined,
+        price: formData.price ? parseFloat(formData.price) : undefined,
+        feet2: formData.feet2 ? parseFloat(formData.feet2) : undefined,
         startDate: formData.startDate ? formatDateForApi(formData.startDate)
           : formatDateForApi(getTodayDate()),
         dueDate: formData.dueDate
@@ -304,7 +315,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
       if (attachments.length > 0) taskData.attachments = attachments;
 
       // Add recurrence configuration if enabled
-      if (recurrenceConfig) {
+      if (ENABLE_RECURRENCE && recurrenceConfig) {
         taskData.isRecurring = true;
         taskData.recurrenceConfig = {
           ...recurrenceConfig,
@@ -564,19 +575,13 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
                     <SelectValue placeholder="Select type" />
                   </SelectTrigger>
                   <SelectContent className="border-[var(--border)] bg-[var(--popover)]">
-                    {[
-                      { value: "TASK", name: "Task" },
-                      { value: "BUG", name: "Bug" },
-                      { value: "EPIC", name: "Epic" },
-                      { value: "STORY", name: "Story" },
-                      { value: "SUBTASK", name: "Subtask" },
-                    ].map((type) => (
+                    {TASK_TYPE_OPTIONS.map((type) => (
                       <SelectItem
                         className="hover:bg-[var(--hover-bg)]"
                         key={type.value}
                         value={type.value}
                       >
-                        {type.name}
+                        {type.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -647,53 +652,57 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
                 </div>
               )}
 
-              <div className="space-y-2">
-                <Label htmlFor="storyPoints">Story Points</Label>
-                <Input
-                  id="storyPoints"
-                  name="storyPoints"
-                  type="number"
-                  min="0"
-                  value={formData.storyPoints}
-                  onChange={(e) => handleFormDataChange("storyPoints", e.target.value)}
-                  placeholder="e.g. 5"
-                  className="w-full border-[var(--border)] bg-[var(--background)]"
-                />
-              </div>
+              {ENABLE_STORY_POINTS && (
+                <div className="space-y-2">
+                  <Label htmlFor="storyPoints">Story Points</Label>
+                  <Input
+                    id="storyPoints"
+                    name="storyPoints"
+                    type="number"
+                    min="0"
+                    value={formData.storyPoints}
+                    onChange={(e) => handleFormDataChange("storyPoints", e.target.value)}
+                    placeholder="e.g. 5"
+                    className="w-full border-[var(--border)] bg-[var(--background)]"
+                  />
+                </div>
+              )}
 
-              <div className="space-y-2">
-                <Label htmlFor="sprint">Sprint</Label>
-                <Select
-                  value={formData.sprintId}
-                  onValueChange={(value) => handleFormDataChange("sprintId", value)}
-                  disabled={loadingSprints}
-                >
-                  <SelectTrigger className="w-full border-[var(--border)] bg-[var(--background)]">
-                    <SelectValue
-                      placeholder={
-                        !selectedProject?.id
-                          ? "Select project first"
-                          : loadingSprints
-                            ? "Loading..."
-                            : "Select sprint (optional)"
-                      }
-                    />
-                  </SelectTrigger>
-                  <SelectContent className="border-[var(--border)] bg-[var(--popover)]">
-                    {sprints.map((sprint) => (
-                      <SelectItem
-                        className="hover:bg-[var(--hover-bg)]"
-                        key={sprint.id}
-                        value={sprint.id}
-                      >
-                        <div className="flex items-center gap-2">
-                          {sprint.name} {sprint.isDefault === true && "(Default)"}
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+              {ENABLE_SPRINTS && (
+                <div className="space-y-2">
+                  <Label htmlFor="sprint">Sprint</Label>
+                  <Select
+                    value={formData.sprintId}
+                    onValueChange={(value) => handleFormDataChange("sprintId", value)}
+                    disabled={loadingSprints}
+                  >
+                    <SelectTrigger className="w-full border-[var(--border)] bg-[var(--background)]">
+                      <SelectValue
+                        placeholder={
+                          !selectedProject?.id
+                            ? "Select project first"
+                            : loadingSprints
+                              ? "Loading..."
+                              : "Select sprint (optional)"
+                        }
+                      />
+                    </SelectTrigger>
+                    <SelectContent className="border-[var(--border)] bg-[var(--popover)]">
+                      {sprints.map((sprint) => (
+                        <SelectItem
+                          className="hover:bg-[var(--hover-bg)]"
+                          key={sprint.id}
+                          value={sprint.id}
+                        >
+                          <div className="flex items-center gap-2">
+                            {sprint.name} {sprint.isDefault === true && "(Default)"}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
 
               <div className="space-y-2">
                 <Label htmlFor="startDate">Start Date</Label>
@@ -732,14 +741,45 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
                   }}
                 />
               </div>
-
-              {/* Recurrence Configuration */}
               <div className="space-y-2">
-                <RecurrenceSelector
-                  value={recurrenceConfig}
-                  onChange={setRecurrenceConfig}
+                <Label htmlFor="price">Price</Label>
+                <Input
+                  id="price"
+                  name="price"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={formData.price}
+                  onChange={(e) => handleFormDataChange("price", e.target.value)}
+                  placeholder="e.g. 100.00"
+                  className="w-full border-[var(--border)] bg-[var(--background)]"
                 />
               </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="feet2">Area (ft²)</Label>
+                <Input
+                  id="feet2"
+                  name="feet2"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={formData.feet2}
+                  onChange={(e) => handleFormDataChange("feet2", e.target.value)}
+                  placeholder="e.g. 250.50"
+                  className="w-full border-[var(--border)] bg-[var(--background)]"
+                />
+              </div>
+
+              {/* Recurrence Configuration */}
+              {ENABLE_RECURRENCE && (
+                <div className="space-y-2">
+                  <RecurrenceSelector
+                    value={recurrenceConfig}
+                    onChange={setRecurrenceConfig}
+                  />
+                </div>
+              )}
             </CardContent>
           </Card>
 

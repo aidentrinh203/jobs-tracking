@@ -10,11 +10,11 @@ import { ChartWrapper } from "../chart-wrapper";
 import { useTranslation } from "react-i18next";
 
 const chartConfig = {
-  STORY: { label: "Story", color: "#10B981" },
-  TASK: { label: "Task", color: "#3B82F6" },
-  BUG: { label: "Bug", color: "#EF4444" },
-  EPIC: { label: "Epic", color: "#8B5CF6" },
-  FEATURE: { label: "Feature", color: "#F59E0B" },
+  STORY: { label: "BIM Modeling", color: "#10B981" },
+  TASK: { label: "Drafting", color: "#3B82F6" },
+  BUG: { label: "Truss Design", color: "#F59E0B" },
+  EPIC: { label: "Takeoff Estimating", color: "#8B5CF6" },
+  SUBTASK: { label: "Revision", color: "#EF4444" },
 };
 
 interface TaskTypeChartProps {
@@ -26,11 +26,11 @@ export function TaskTypeChart({ data }: TaskTypeChartProps) {
   const safeData = Array.isArray(data) ? data : [];
   
   const translatedConfig = {
-    STORY: { label: t("charts.task_type_distribution.types.story"), color: chartConfig.STORY.color },
-    TASK: { label: t("charts.task_type_distribution.types.task"), color: chartConfig.TASK.color },
-    BUG: { label: t("charts.task_type_distribution.types.bug"), color: chartConfig.BUG.color },
-    EPIC: { label: t("charts.task_type_distribution.types.epic"), color: chartConfig.EPIC.color },
-    FEATURE: { label: t("charts.task_type_distribution.types.feature"), color: chartConfig.FEATURE.color },
+    STORY: { label: chartConfig.STORY.label, color: chartConfig.STORY.color },
+    TASK: { label: chartConfig.TASK.label, color: chartConfig.TASK.color },
+    BUG: { label: chartConfig.BUG.label, color: chartConfig.BUG.color },
+    EPIC: { label: chartConfig.EPIC.label, color: chartConfig.EPIC.color },
+    SUBTASK: { label: chartConfig.SUBTASK.label, color: chartConfig.SUBTASK.color },
   };
 
   const chartData = safeData.map((item) => ({
@@ -39,7 +39,7 @@ export function TaskTypeChart({ data }: TaskTypeChartProps) {
     color: translatedConfig[item.type as keyof typeof translatedConfig]?.color || "#8B5CF6",
   }));
 
-  const typeOrder = ["STORY", "TASK", "BUG", "FEATURE", "EPIC"];
+  const typeOrder = ["STORY", "TASK", "BUG", "EPIC", "SUBTASK"];
   const sortedChartData =
     chartData &&
     [...chartData].sort((a, b) => {

@@ -5,12 +5,12 @@ import { ChartWrapper } from "../chart-wrapper";
 import { useRouter } from "next/router";
 
 const chartConfig = {
-  STORY: { label: "Story", color: "#10B981" },
-  TASK: { label: "Task", color: "#3B82F6" },
-  BUG: { label: "Bug", color: "#EF4444" },
-  EPIC: { label: "Epic", color: "#8B5CF6" },
+  STORY: { label: "BIM Modeling", color: "#10B981" },
+  TASK: { label: "Drafting", color: "#3B82F6" },
+  BUG: { label: "Truss Design", color: "#EF4444" },
+  EPIC: { label: "Takeoff Estimating", color: "#8B5CF6" },
   FEATURE: { label: "Feature", color: "#F59E0B" },
-  SUBTASK: { label: "Subtask", color: "#F97316" },
+  SUBTASK: { label: "Revision", color: "#F97316" },
 };
 
 interface TaskTypeChartProps {

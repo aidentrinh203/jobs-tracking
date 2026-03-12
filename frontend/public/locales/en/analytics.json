@@ -70,8 +70,8 @@
       "description": "{{resolved}}/{{total}} bugs fixed"
     },
     "task_completion": {
-      "title": "Task Completion",
-      "label": "Task Completion",
+      "title": "Job Completion",
+      "label": "Job Completion",
       "description": "Overall progress"
     },
     "open_bugs": {

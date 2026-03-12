@@ -123,7 +123,8 @@ export default function TaskDetailClient({
     taskType: false,
     recurrence: false,
     sprint: false,
-
+    price: false,
+    feet2: false,
   });
   const [editRecurrenceConfig, setEditRecurrenceConfig] = useState<any>(null);
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
@@ -171,6 +172,8 @@ export default function TaskDetailClient({
     startDate: task?.startDate ? task.startDate.split("T")[0] : "",
     taskType: task?.type || task?.taskType || "",
     sprintId: task?.sprintId || "",
+    price: task?.price?.toString() || "",
+    feet2: task?.feet2?.toString() || "",
   });
 
   // Track if there are unsaved changes
@@ -790,6 +793,8 @@ export default function TaskDetailClient({
       taskType: false,
       recurrence: false,
       sprint: false,
+      price: false,
+      feet2: false,
     });
   };
 
@@ -833,6 +838,8 @@ export default function TaskDetailClient({
         taskType: false,
         recurrence: false,
         sprint: false,
+        price: false,
+        feet2: false,
       });
       onTaskRefetch && onTaskRefetch();
       toast.success(t("detail.updateTaskSuccess"));
@@ -867,6 +874,8 @@ export default function TaskDetailClient({
             startDate: task.startDate ? task.startDate.split("T")[0] : "",
             taskType: task.type || task.taskType || "",
             sprintId: task.sprintId || "",
+            price: task.price?.toString() || "",
+            feet2: task.feet2?.toString() || "",
           });
           setIsEditingTask({
             title: false,
@@ -878,6 +887,8 @@ export default function TaskDetailClient({
             taskType: false,
             recurrence: false,
             sprint: false,
+            price: false,
+            feet2: false,
           });
           setConfirmModal((prev) => ({ ...prev, isOpen: false }));
         },
@@ -893,6 +904,8 @@ export default function TaskDetailClient({
         taskType: false,
         recurrence: false,
         sprint: false,
+        price: false,
+        feet2: false,
       });
     }
   };
@@ -1405,154 +1418,154 @@ export default function TaskDetailClient({
 
                 {/* Sprint */}
                 {ENABLE_SPRINTS && (
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <Label className="text-sm">{t("detail.sprint")}</Label>
-                    {hasAccess && (
-                      <button
-                        type="button"
-                        className="rounded transition flex items-center cursor-pointer text-[var(--muted-foreground)] hover:text-[var(--foreground)] text-xs p-1"
-                        onClick={() => {
-                          setIsEditingTask((prev) => ({
-                            ...prev,
-                            sprint: true,
-                          }));
-                          setAutoOpenDropdown((prev) => ({
-                            ...prev,
-                            sprint: true,
-                          }));
-                        }}
-                        tabIndex={0}
-                        aria-label={t("detail.edit")}
-                        style={{ lineHeight: 0 }}
-                      >
-                        {t("detail.edit")}
-                      </button>
-                    )}
-                  </div>
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <Label className="text-sm">{t("detail.sprint")}</Label>
+                      {hasAccess && (
+                        <button
+                          type="button"
+                          className="rounded transition flex items-center cursor-pointer text-[var(--muted-foreground)] hover:text-[var(--foreground)] text-xs p-1"
+                          onClick={() => {
+                            setIsEditingTask((prev) => ({
+                              ...prev,
+                              sprint: true,
+                            }));
+                            setAutoOpenDropdown((prev) => ({
+                              ...prev,
+                              sprint: true,
+                            }));
+                          }}
+                          tabIndex={0}
+                          aria-label={t("detail.edit")}
+                          style={{ lineHeight: 0 }}
+                        >
+                          {t("detail.edit")}
+                        </button>
+                      )}
+                    </div>
 
-                  {/* Conditionally render badge or dropdown */}
-                  <div className="mt-2">
-                    {isEditingTask.sprint ? (
-                      <DropdownAction
-                        currentItem={
-                          editTaskData.sprintId
-                            ? {
-                                id: editTaskData.sprintId,
-                                name:
-                                  sprints.find((s) => s.id === editTaskData.sprintId)?.name ||
-                                  task.sprint?.name ||
-                                  "Selected Sprint",
-                                color: "#6366F1",
-                              }
-                            : {
-                                id: "",
-                                name: t("detail.backlog"),
-                                color: "#6B7280",
-                              }
-                        }
-                        availableItems={[
-                          { id: "", name: t("detail.backlog"), color: "#6B7280" },
-                          ...sprints.map((s) => ({
-                            id: s.id,
-                            name: s.name,
-                            color: "#6366F1",
-                          })),
-                        ]}
-                        loading={loadingSprints}
-                        forceOpen={autoOpenDropdown.sprint}
-                        onOpenStateChange={(isOpen) => {
-                          if (!isOpen) {
-                            setAutoOpenDropdown((prev) => ({
-                              ...prev,
-                              sprint: false,
-                            }));
-                            setIsEditingTask((prev) => ({
-                              ...prev,
-                              sprint: false,
-                            }));
+                    {/* Conditionally render badge or dropdown */}
+                    <div className="mt-2">
+                      {isEditingTask.sprint ? (
+                        <DropdownAction
+                          currentItem={
+                            editTaskData.sprintId
+                              ? {
+                                  id: editTaskData.sprintId,
+                                  name:
+                                    sprints.find((s) => s.id === editTaskData.sprintId)?.name ||
+                                    task.sprint?.name ||
+                                    "Selected Sprint",
+                                  color: "#6366F1",
+                                }
+                              : {
+                                  id: "",
+                                  name: t("detail.backlog"),
+                                  color: "#6B7280",
+                                }
                           }
-                        }}
-                        onItemSelect={async (item) => {
-                          try {
-                            const updateData: UpdateTaskRequest = {
-                              sprintId: item.id || null,
-                            };
-                            await updateTask(taskId, updateData);
-                            handleTaskFieldChange("sprintId", item.id);
-                            task.sprintId = item.id || null;
-                            task.sprint = item.id ? sprints.find(s => s.id === item.id) : null;
-                            setIsEditingTask((prev) => ({
-                              ...prev,
-                              sprint: false,
-                            }));
-                            setAutoOpenDropdown((prev) => ({
-                              ...prev,
-                              sprint: false,
-                            }));
-                            if (!isAIActive()) { onTaskRefetch && onTaskRefetch(); }
-                            toast.success(t("detail.updateSprintSuccess"));
-                            handleAIAutoClose();
-                          } catch (error) {
-                            toast.error(t("detail.updateSprintError"));
-                          }
-                        }}
-                        placeholder={t("detail.placeholderSelectSprint")}
-                        showUnassign={false}
-                        hideAvatar={true}
-                        hideSubtext={true}
-                        itemType="sprint"
-                        onDropdownOpen={async () => {
-                          if (sprints.length === 0) {
-                            const slug = projectSlug || task.project?.slug;
-                            if (slug) {
-                              setLoadingSprints(true);
-                              try {
-                                const projectSprints = await getSprintsByProject(slug);
-                                setSprints(projectSprints || []);
-                              } catch (error) {
-                                toast.error(t("detail.fetchSprintsError"));
-                              } finally {
-                                setLoadingSprints(false);
+                          availableItems={[
+                            { id: "", name: t("detail.backlog"), color: "#6B7280" },
+                            ...sprints.map((s) => ({
+                              id: s.id,
+                              name: s.name,
+                              color: "#6366F1",
+                            })),
+                          ]}
+                          loading={loadingSprints}
+                          forceOpen={autoOpenDropdown.sprint}
+                          onOpenStateChange={(isOpen) => {
+                            if (!isOpen) {
+                              setAutoOpenDropdown((prev) => ({
+                                ...prev,
+                                sprint: false,
+                              }));
+                              setIsEditingTask((prev) => ({
+                                ...prev,
+                                sprint: false,
+                              }));
+                            }
+                          }}
+                          onItemSelect={async (item) => {
+                            try {
+                              const updateData: UpdateTaskRequest = {
+                                sprintId: item.id || null,
+                              };
+                              await updateTask(taskId, updateData);
+                              handleTaskFieldChange("sprintId", item.id);
+                              task.sprintId = item.id || null;
+                              task.sprint = item.id ? sprints.find(s => s.id === item.id) : null;
+                              setIsEditingTask((prev) => ({
+                                ...prev,
+                                sprint: false,
+                              }));
+                              setAutoOpenDropdown((prev) => ({
+                                ...prev,
+                                sprint: false,
+                              }));
+                              if (!isAIActive()) { onTaskRefetch && onTaskRefetch(); }
+                              toast.success(t("detail.updateSprintSuccess"));
+                              handleAIAutoClose();
+                            } catch (error) {
+                              toast.error(t("detail.updateSprintError"));
+                            }
+                          }}
+                          placeholder={t("detail.placeholderSelectSprint")}
+                          showUnassign={false}
+                          hideAvatar={true}
+                          hideSubtext={true}
+                          itemType="sprint"
+                          onDropdownOpen={async () => {
+                            if (sprints.length === 0) {
+                              const slug = projectSlug || task.project?.slug;
+                              if (slug) {
+                                setLoadingSprints(true);
+                                try {
+                                  const projectSprints = await getSprintsByProject(slug);
+                                  setSprints(projectSprints || []);
+                                } catch (error) {
+                                  toast.error(t("detail.fetchSprintsError"));
+                                } finally {
+                                  setLoadingSprints(false);
+                                }
                               }
                             }
-                          }
-                        }}
-                      />
-                    ) : (
-                      <div
-                        onClick={() => {
-                          if (hasAccess) {
-                            setIsEditingTask((prev) => ({
-                              ...prev,
-                              sprint: true,
-                            }));
-                            setAutoOpenDropdown((prev) => ({
-                              ...prev,
-                              sprint: true,
-                            }));
-                          }
-                        }}
-                        className={hasAccess ? 'cursor-pointer' : ''}
-                      >
-                        <DynamicBadge
-                          label={
-                            editTaskData.sprintId
-                              ? sprints.find((s) => s.id === editTaskData.sprintId)?.name ||
-                              task.sprint?.name ||
-                              "Current Sprint"
-                              : t("detail.backlog")
-                          }
-                          bgColor={editTaskData.sprintId ? "#6366F1" : "#6B7280"}
-                          textColor="#FFFFFF"
-                          size="sm"
-                          variant="solid"
-                          className="flex-shrink-0 min-w-[120px] min-h-[29.33px] text-[13px]"
+                          }}
                         />
-                      </div>
-                    )}
+                      ) : (
+                        <div
+                          onClick={() => {
+                            if (hasAccess) {
+                              setIsEditingTask((prev) => ({
+                                ...prev,
+                                sprint: true,
+                              }));
+                              setAutoOpenDropdown((prev) => ({
+                                ...prev,
+                                sprint: true,
+                              }));
+                            }
+                          }}
+                          className={hasAccess ? 'cursor-pointer' : ''}
+                        >
+                          <DynamicBadge
+                            label={
+                              editTaskData.sprintId
+                                ? sprints.find((s) => s.id === editTaskData.sprintId)?.name ||
+                                task.sprint?.name ||
+                                "Current Sprint"
+                                : t("detail.backlog")
+                            }
+                            bgColor={editTaskData.sprintId ? "#6366F1" : "#6B7280"}
+                            textColor="#FFFFFF"
+                            size="sm"
+                            variant="solid"
+                            className="flex-shrink-0 min-w-[120px] min-h-[29.33px] text-[13px]"
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
                 )}
 
                 {/* Priority */}
@@ -1888,6 +1901,158 @@ export default function TaskDetailClient({
                         {editTaskData.dueDate
                           ? new Date(editTaskData.dueDate).toLocaleDateString()
                           : t("detail.noDueDate")}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+
+                {/* Price */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label className="text-sm">{t("detail.price")}</Label>
+                    {hasAccess && (
+                      <button
+                        type="button"
+                        className="rounded transition flex items-center cursor-pointer text-[var(--muted-foreground)] hover:text-[var(--foreground)] text-xs p-1"
+                        onClick={() =>
+                          setIsEditingTask((prev) => ({
+                            ...prev,
+                            price: !prev.price,
+                          }))
+                        }
+                        tabIndex={0}
+                        aria-label={t("detail.edit")}
+                        style={{ lineHeight: 0 }}
+                      >
+                        {isEditingTask.price ? t("detail.done") : t("detail.edit")}
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="mt-2">
+                    {isEditingTask.price ? (
+                      <div className="relative">
+                        <Input
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          value={editTaskData.price}
+                          onChange={(e) => handleTaskFieldChange("price", e.target.value)}
+                          onBlur={async (e) => {
+                            const newPrice = e.target.value ? parseFloat(e.target.value) : null;
+                            const currentPrice = task.price || null;
+                            if (newPrice !== currentPrice) {
+                              try {
+                                await updateTask(taskId, {
+                                  price: newPrice,
+                                });
+                                task.price = newPrice;
+                                onTaskRefetch && onTaskRefetch();
+                                toast.success(t("detail.updatePriceSuccess"));
+                              } catch (error) {
+                                toast.error(t("detail.updatePriceError"));
+                                handleTaskFieldChange("price", task.price?.toString() || "");
+                              }
+                            }
+                          }}
+                          className="text-xs bg-[var(--background)] border-[var(--border)] w-full"
+                          placeholder={t("detail.placeholderEnterPrice")}
+                        />
+                      </div>
+                    ) : (
+                      <Badge
+                        onClick={() => {
+                          if (hasAccess) {
+                            setIsEditingTask((prev) => ({
+                              ...prev,
+                              price: true,
+                            }));
+                          }
+                        }}
+                        variant="outline"
+                        className={`text-[13px] min-w-[120px] min-h-[29.33px] rounded-2xl px-1.5 py-0.5 bg-[var(--muted)] border-[var(--border)] flex-shrink-0 ${
+                          hasAccess ? "cursor-pointer" : ""
+                        }`}
+                      >
+                        {editTaskData.price
+                          ? `$${parseFloat(editTaskData.price).toFixed(2)}`
+                          : t("detail.noPrice")}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+
+                {/* Area (ft²) */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <Label className="text-sm">{t("detail.feet2")}</Label>
+                    {hasAccess && (
+                      <button
+                        type="button"
+                        className="rounded transition flex items-center cursor-pointer text-[var(--muted-foreground)] hover:text-[var(--foreground)] text-xs p-1"
+                        onClick={() =>
+                          setIsEditingTask((prev) => ({
+                            ...prev,
+                            feet2: !prev.feet2,
+                          }))
+                        }
+                        tabIndex={0}
+                        aria-label={t("detail.edit")}
+                        style={{ lineHeight: 0 }}
+                      >
+                        {isEditingTask.feet2 ? t("detail.done") : t("detail.edit")}
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="mt-2">
+                    {isEditingTask.feet2 ? (
+                      <div className="relative">
+                        <Input
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          value={editTaskData.feet2}
+                          onChange={(e) => handleTaskFieldChange("feet2", e.target.value)}
+                          onBlur={async (e) => {
+                            const newFeet2 = e.target.value ? parseFloat(e.target.value) : null;
+                            const currentFeet2 = task.feet2 || null;
+                            if (newFeet2 !== currentFeet2) {
+                              try {
+                                await updateTask(taskId, {
+                                  feet2: newFeet2,
+                                });
+                                task.feet2 = newFeet2;
+                                onTaskRefetch && onTaskRefetch();
+                                toast.success(t("detail.updateFeet2Success"));
+                              } catch (error) {
+                                toast.error(t("detail.updateFeet2Error"));
+                                handleTaskFieldChange("feet2", task.feet2?.toString() || "");
+                              }
+                            }
+                          }}
+                          className="text-xs bg-[var(--background)] border-[var(--border)] w-full"
+                          placeholder={t("detail.placeholderEnterFeet2")}
+                        />
+                      </div>
+                    ) : (
+                      <Badge
+                        onClick={() => {
+                          if (hasAccess) {
+                            setIsEditingTask((prev) => ({
+                              ...prev,
+                              feet2: true,
+                            }));
+                          }
+                        }}
+                        variant="outline"
+                        className={`text-[13px] min-w-[120px] min-h-[29.33px] rounded-2xl px-1.5 py-0.5 bg-[var(--muted)] border-[var(--border)] flex-shrink-0 ${
+                          hasAccess ? "cursor-pointer" : ""
+                        }`}
+                      >
+                        {editTaskData.feet2
+                          ? `${parseFloat(editTaskData.feet2).toFixed(2)} ft²`
+                          : t("detail.noFeet2")}
                       </Badge>
                     )}
                   </div>

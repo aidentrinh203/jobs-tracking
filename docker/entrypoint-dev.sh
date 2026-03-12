@@ -57,10 +57,10 @@ echo ""
 echo "🔨 Generating Prisma Client..."
 npm run db:generate
 
-# Run database migrations
+# Run database migrations (deploy mode for non-interactive)
 echo ""
 echo "🗃️  Running database migrations..."
-npm run db:migrate || {
+npm run db:migrate:deploy || {
   echo "⚠️  Migration failed or already up to date"
 }
 

@@ -11,6 +11,7 @@ import {
   ArrayUnique,
   IsBoolean,
   ValidateNested,
+  IsNumber,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { TaskType, TaskPriority } from '@prisma/client';
@@ -111,6 +112,26 @@ export class CreateTaskDto {
   @IsInt()
   @IsOptional()
   remainingEstimate?: number;
+
+  @ApiProperty({
+    description: 'Price or cost of the task',
+    example: 150.50,
+    minimum: 0,
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  price?: number;
+
+  @ApiProperty({
+    description: 'Area in square feet',
+    example: 250.75,
+    minimum: 0,
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  feet2?: number;
 
   @ApiProperty({
     description: 'Custom fields specific to the task',

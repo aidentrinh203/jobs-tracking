@@ -10,6 +10,8 @@ export interface CreateTaskRequest {
   storyPoints?: number;
   originalEstimate?: number;
   remainingEstimate?: number;
+  price?: number;
+  feet2?: number;
   customFields?: Record<string, any>;
   projectId: string;
   assigneeIds?: string[];
@@ -36,6 +38,8 @@ export interface UpdateTaskRequest {
   startDate?: string;
   dueDate?: string;
   remainingEstimate?: number;
+  price?: number;
+  feet2?: number;
   assigneeIds?: string[];
   reporterIds?: string[];
   statusId?: string;

@@ -88,10 +88,10 @@ export function ProjectKPIMetrics({ data, taskStatus }: ProjectKPIMetricsProps) 
   const [orderedIds, setOrderedIds] = useState<string[]>([
     "total-tasks",
     "completed-tasks",
-    "active-sprints",
-    "bug-resolution",
+    // "active-sprints",
+    // "bug-resolution",
     "task-completion",
-    "open-bugs",
+    // "open-bugs",
   ]);
 
   const doneStatusIds = useMemo(() => {
@@ -165,29 +165,29 @@ export function ProjectKPIMetrics({ data, taskStatus }: ProjectKPIMetricsProps) 
             icon: <CheckCircle className="h-4 w-4" />,
             onClick: () => handleNavigate("/tasks", doneStatusIds ? { statuses: doneStatusIds } : {}),
           };
-        case "active-sprints":
-          return {
-            id,
-            title: t("kpi.active_sprints.title"),
-            label: t("kpi.active_sprints.label"),
-            value: data?.activeSprints,
-            description: t("kpi.active_sprints.description"),
-            icon: <Zap className="h-4 w-4" />,
-            onClick: () => handleNavigate("/sprints"),
-          };
-        case "bug-resolution":
-          return {
-            id,
-            title: t("kpi.bug_resolution.title"),
-            label: t("kpi.bug_resolution.label"),
-            value: `${data?.bugResolutionRate.toFixed(1)}%`,
-            description: t("kpi.bug_resolution.description", {
-              resolved: data?.resolvedBugs,
-              total: data?.totalBugs,
-            }),
-            icon: <Bug className="h-4 w-4" />,
-            onClick: () => handleNavigate("/tasks",  doneStatusIds ? { statuses: doneStatusIds, types: "BUG" } : {}),
-          };
+        // case "active-sprints":
+        //   return {
+        //     id,
+        //     title: t("kpi.active_sprints.title"),
+        //     label: t("kpi.active_sprints.label"),
+        //     value: data?.activeSprints,
+        //     description: t("kpi.active_sprints.description"),
+        //     icon: <Zap className="h-4 w-4" />,
+        //     onClick: () => handleNavigate("/sprints"),
+        //   };
+        // case "bug-resolution":
+        //   return {
+        //     id,
+        //     title: t("kpi.bug_resolution.title"),
+        //     label: t("kpi.bug_resolution.label"),
+        //     value: `${data?.bugResolutionRate.toFixed(1)}%`,
+        //     description: t("kpi.bug_resolution.description", {
+        //       resolved: data?.resolvedBugs,
+        //       total: data?.totalBugs,
+        //     }),
+        //     icon: <Bug className="h-4 w-4" />,
+        //     onClick: () => handleNavigate("/tasks",  doneStatusIds ? { statuses: doneStatusIds, types: "BUG" } : {}),
+        //   };
         case "task-completion":
           return {
             id,
@@ -203,21 +203,21 @@ export function ProjectKPIMetrics({ data, taskStatus }: ProjectKPIMetricsProps) 
               ),
             onClick: () => handleNavigate("/tasks", doneStatusIds ? { statuses: doneStatusIds } : {}),
           };
-        case "open-bugs":
-          return {
-            id,
-            title: t("kpi.open_bugs.title"),
-            label: t("kpi.open_bugs.label"),
-            value: data?.totalBugs - data?.resolvedBugs,
-            description: t("kpi.open_bugs.description"),
-            icon:
-              data?.totalBugs - data?.resolvedBugs === 0 ? (
-                <CheckCircle className="h-4 w-4" />
-              ) : (
-                <Bug className="h-4 w-4" />
-              ),
-            onClick: () => handleNavigate("/tasks", openStatusIds ? { types: "BUG", statuses: openStatusIds } : {} ),
-          };
+        // case "open-bugs":
+        //   return {
+        //     id,
+        //     title: t("kpi.open_bugs.title"),
+        //     label: t("kpi.open_bugs.label"),
+        //     value: data?.totalBugs - data?.resolvedBugs,
+        //     description: t("kpi.open_bugs.description"),
+        //     icon:
+        //       data?.totalBugs - data?.resolvedBugs === 0 ? (
+        //         <CheckCircle className="h-4 w-4" />
+        //       ) : (
+        //         <Bug className="h-4 w-4" />
+        //       ),
+        //     onClick: () => handleNavigate("/tasks", openStatusIds ? { types: "BUG", statuses: openStatusIds } : {} ),
+        //   };
         default:
           return null;
       }

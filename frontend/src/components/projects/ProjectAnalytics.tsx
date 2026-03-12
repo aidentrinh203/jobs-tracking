@@ -150,15 +150,15 @@ export function ProjectAnalytics({ projectSlug }: ProjectAnalyticsProps) {
       gridCols: "col-span-1 md:col-span-1",
       priority: 4,
     },
-    {
-      id: "sprint-velocity",
-      title: t("charts.sprint_velocity_trend.title"),
-      component: SprintVelocityChart,
-      dataKey: "sprintVelocity",
-      visible: true,
-      gridCols: "col-span-1 md:col-span-1",
-      priority: 5,
-    },
+    // {
+    //   id: "sprint-velocity",
+    //   title: t("charts.sprint_velocity_trend.title"),
+    //   component: SprintVelocityChart,
+    //   dataKey: "sprintVelocity",
+    //   visible: true,
+    //   gridCols: "col-span-1 md:col-span-1",
+    //   priority: 5,
+    // },
   ]);
 
   // DnD State
