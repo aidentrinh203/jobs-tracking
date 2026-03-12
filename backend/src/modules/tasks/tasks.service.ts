@@ -144,6 +144,9 @@ export class TasksService {
         taskCreateData.originalEstimate = taskData.originalEstimate;
       if (taskData.remainingEstimate !== undefined)
         taskCreateData.remainingEstimate = taskData.remainingEstimate;
+      if (taskData.price !== undefined) taskCreateData.price = taskData.price;
+      if (taskData.feet2 !== undefined) taskCreateData.feet2 = taskData.feet2;
+      if (taskData.address) taskCreateData.address = taskData.address;
       if (taskData.customFields) taskCreateData.customFields = taskData.customFields;
       if (taskData.parentTaskId) taskCreateData.parentTaskId = taskData.parentTaskId;
       if (taskData.completedAt !== undefined) taskCreateData.completedAt = taskData.completedAt;
@@ -339,6 +342,9 @@ export class TasksService {
         taskCreateData.originalEstimate = taskData.originalEstimate;
       if (taskData.remainingEstimate !== undefined)
         taskCreateData.remainingEstimate = taskData.remainingEstimate;
+      if (taskData.price !== undefined) taskCreateData.price = taskData.price;
+      if (taskData.feet2 !== undefined) taskCreateData.feet2 = taskData.feet2;
+      if (taskData.address) taskCreateData.address = taskData.address;
       if (taskData.customFields) taskCreateData.customFields = taskData.customFields;
       if (taskData.parentTaskId) taskCreateData.parentTaskId = taskData.parentTaskId;
       if (taskData.completedAt !== undefined) taskCreateData.completedAt = taskData.completedAt;

@@ -214,6 +214,7 @@ model Project {
   name            String
   slug            String            @unique
   description     String?
+  address         String?
   avatar          String? // Made required (removed ?)
   color           String // Made required (removed ?)
   status          ProjectStatus     @default(PLANNING)
@@ -280,6 +281,7 @@ model Task {
   remainingEstimate Int?         @map("remaining_estimate")
   price             Float?
   feet2             Float?
+  address           String?
   customFields      Json?        @map("custom_fields")
   projectId         String       @map("project_id") @db.Uuid
   statusId          String       @map("status_id") @db.Uuid

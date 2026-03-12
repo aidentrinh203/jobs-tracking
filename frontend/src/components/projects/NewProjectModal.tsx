@@ -49,6 +49,10 @@ export function NewProjectModal({
   workspaceSlug,
   onProjectCreated,
 }: NewProjectModalProps) {
+  // Feature flags for enabling/disabling features
+  const ENABLE_WORKSPACE_SELECTION = false; // Set to true to enable workspace selection
+  const ENABLE_PROJECT_COLORS = false; // Set to true to enable project color/category selection
+
   const workspaceContext = useWorkspace();
   const projectContext = useProject();
 
@@ -58,6 +62,7 @@ export function NewProjectModal({
   const [formData, setFormData] = useState({
     name: "",
     description: "",
+    address: "",
     workspace: null as any,
     color: "#3B82F6",
     category: "operational",
@@ -261,6 +266,7 @@ export function NewProjectModal({
         name: formData.name.trim(),
         slug: projectSlug,
         description: formData.description.trim(),
+        address: formData.address.trim() || undefined,
         color: formData.color,
         status: "ACTIVE" as const,
         priority: "MEDIUM" as const,
@@ -295,6 +301,7 @@ export function NewProjectModal({
     setFormData({
       name: "",
       description: "",
+      address: "",
       workspace: null,
       color: "#3B82F6",
       category: "operational",
@@ -600,7 +607,7 @@ export function NewProjectModal({
           </div>
 
           {/* Workspace - Conditionally rendered */}
-          {!isWorkspacePreSelected && (
+          {ENABLE_WORKSPACE_SELECTION && !isWorkspacePreSelected && (
             <div className="projects-form-field">
               <Label className="projects-form-label">
                 <HiBuildingOffice2
@@ -686,7 +693,7 @@ export function NewProjectModal({
           )}
 
           {/* Workspace - Read-only field when pre-selected */}
-          {isWorkspacePreSelected && formData.workspace && (
+          {ENABLE_WORKSPACE_SELECTION && isWorkspacePreSelected && formData.workspace && (
             <div className="projects-form-field">
               <Label className="projects-form-label">
                 <HiBuildingOffice2
@@ -714,6 +721,47 @@ export function NewProjectModal({
               </p>
             </div>
           )}
+
+          {/* Address */}
+          <div className="projects-form-field">
+            <Label htmlFor="address" className="projects-form-label">
+              <HiDocumentText
+                className="projects-form-label-icon"
+                style={{ color: "var(--dynamic-primary)" }}
+              />
+              Address
+            </Label>
+            <Input
+              id="address"
+              placeholder="Enter project address or location..."
+              value={formData.address}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  address: e.target.value,
+                }))
+              }
+              className="projects-form-input border-none"
+              style={{
+                borderColor: "var(--border)",
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = "var(--dynamic-primary)";
+                e.target.style.boxShadow = `0 0 0 3px var(--dynamic-primary-20)`;
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = "var(--border)";
+                e.target.style.boxShadow = "none";
+              }}
+            />
+            <p className="projects-form-hint">
+              <HiDocumentText
+                className="projects-form-hint-icon"
+                style={{ color: "var(--dynamic-primary)" }}
+              />
+              Specify the physical location or construction site address.
+            </p>
+          </div>
 
           {/* Description */}
           <div className="projects-form-field">
@@ -757,14 +805,15 @@ export function NewProjectModal({
           </div>
 
           {/* Project Category - Dropdown */}
-          <div className="projects-form-field">
-            <Label className="projects-form-label">
-              <HiColorSwatch
-                className="projects-form-label-icon"
-                style={{ color: "var(--dynamic-primary)" }}
-              />
-              Project Colors
-            </Label>
+          {ENABLE_PROJECT_COLORS && (
+            <div className="projects-form-field">
+              <Label className="projects-form-label">
+                <HiColorSwatch
+                  className="projects-form-label-icon"
+                  style={{ color: "var(--dynamic-primary)" }}
+                />
+                Project Colors
+              </Label>
             <Popover open={categoryOpen} onOpenChange={setCategoryOpen} modal={true}>
               <PopoverTrigger asChild>
                 <Button
@@ -844,6 +893,7 @@ export function NewProjectModal({
               Choose a category to help organize and identify your project.
             </p>
           </div>
+          )}
 
           {/* Submit Buttons */}
           <div className="projects-form-actions flex gap-2 justify-end mt-6">

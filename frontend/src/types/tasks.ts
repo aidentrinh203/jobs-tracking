@@ -42,6 +42,9 @@ export interface Task {
   storyPoints?: number;
   originalEstimate?: number;
   remainingEstimate?: number;
+  price?: number;
+  feet2?: number;
+  address?: string;
   customFields?: any;
   projectId?: string;
   assignees?: User[];

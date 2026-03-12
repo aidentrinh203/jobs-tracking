@@ -125,6 +125,7 @@ export default function TaskDetailClient({
     sprint: false,
     price: false,
     feet2: false,
+    address: false,
   });
   const [editRecurrenceConfig, setEditRecurrenceConfig] = useState<any>(null);
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
@@ -174,12 +175,14 @@ export default function TaskDetailClient({
     sprintId: task?.sprintId || "",
     price: task?.price?.toString() || "",
     feet2: task?.feet2?.toString() || "",
+    address: task?.address || "",
   });
 
   // Track if there are unsaved changes
   const hasUnsavedChanges =
     editTaskData.title !== (task?.title || "") ||
     editTaskData.description !== (task?.description || "") ||
+    editTaskData.address !== (task?.address || "") ||
     editTaskData.dueDate !== (task?.dueDate ? task.dueDate.split("T")[0] : "");
 
   const handleStartDateChange = (newStartDate: string) => {
@@ -249,6 +252,24 @@ export default function TaskDetailClient({
   const isAssigneeOrReporter =
     assignees?.some((a) => a?.id === currentUser?.id) ||
     reporters?.some((r) => r?.id === currentUser?.id);
+
+  // Sync editTaskData with task prop when it changes
+  useEffect(() => {
+    if (task) {
+      setEditTaskData({
+        title: task.title || "",
+        description: task.description || "",
+        priority: typeof task.priority === "object" ? task.priority?.name : task.priority || "",
+        dueDate: task.dueDate ? task.dueDate.split("T")[0] : "",
+        startDate: task.startDate ? task.startDate.split("T")[0] : "",
+        taskType: task.type || task.taskType || "",
+        sprintId: task.sprintId || "",
+        price: task.price?.toString() || "",
+        feet2: task.feet2?.toString() || "",
+        address: task.address || "",
+      });
+    }
+  }, [task?.id, task?.title, task?.description, task?.address, task?.price, task?.feet2, task?.dueDate, task?.startDate, task?.priority, task?.type, task?.taskType, task?.sprintId]);
 
   const handleStatusChange = async (item: any) => {
     if (!item) return;
@@ -795,6 +816,7 @@ export default function TaskDetailClient({
       sprint: false,
       price: false,
       feet2: false,
+      address: false,
     });
   };
 
@@ -817,6 +839,7 @@ export default function TaskDetailClient({
       const updatedTask = await updateTask(taskId, {
         title: editTaskData?.title?.trim(),
         description: sanitizedDescription,
+        address: editTaskData.address?.trim() || undefined,
         priority: editTaskData.priority || "MEDIUM",
         startDate: task.startDate || new Date().toISOString(),
         dueDate: editTaskData.dueDate ? formatDateForApi(editTaskData.dueDate) : undefined,
@@ -840,6 +863,7 @@ export default function TaskDetailClient({
         sprint: false,
         price: false,
         feet2: false,
+        address: false,
       });
       onTaskRefetch && onTaskRefetch();
       toast.success(t("detail.updateTaskSuccess"));
@@ -857,6 +881,7 @@ export default function TaskDetailClient({
     const hasChanges =
       editTaskData.title !== task.title ||
       editTaskData.description !== task.description ||
+      editTaskData.address !== (task.address || "") ||
       editTaskData.dueDate !== (task.dueDate ? task.dueDate.split("T")[0] : "");
 
     if (hasChanges) {
@@ -876,6 +901,7 @@ export default function TaskDetailClient({
             sprintId: task.sprintId || "",
             price: task.price?.toString() || "",
             feet2: task.feet2?.toString() || "",
+            address: task.address || "",
           });
           setIsEditingTask({
             title: false,
@@ -889,6 +915,7 @@ export default function TaskDetailClient({
             sprint: false,
             price: false,
             feet2: false,
+            address: false,
           });
           setConfirmModal((prev) => ({ ...prev, isOpen: false }));
         },
@@ -906,6 +933,7 @@ export default function TaskDetailClient({
         sprint: false,
         price: false,
         feet2: false,
+        address: false,
       });
     }
   };
@@ -1170,6 +1198,17 @@ export default function TaskDetailClient({
                     placeholder={t("detail.placeholderTaskTitle")}
                     className="text-xs bg-[var(--background)] border-[var(--border)]"
                   />
+                  <div>
+                    <Label className="text-sm mb-2 block">{t("detail.address", "Address")}</Label>
+                    <Input
+                      type="text"
+                      value={editTaskData.address}
+                      onChange={(e) => handleTaskFieldChange("address", e.target.value)}
+                      placeholder={t("detail.placeholderEnterAddress", "Enter address or location...")}
+                      className="text-xs bg-[var(--background)] border-[var(--border)]"
+                    />
+                  </div>
+                  <Label className="text-sm font-semibold mb-2 block">{t("detail.description", "Description")}</Label>
                   <TaskDescription
                     value={editTaskData.description}
                     onChange={(value) => handleTaskFieldChange("description", value)}
@@ -1195,13 +1234,24 @@ export default function TaskDetailClient({
                   </div>
                 </div>
               ) : (
-                <TaskDescription
-                  value={editTaskData.description}
-                  editMode={false}
-                  onChange={(value) => handleTaskFieldChange("description", value)}
-                  onSaveRequest={handleCheckboxSave}
-                  emailThreadId={task.emailThreadId}
-                />
+                <div className="space-y-4">
+                  {/* Address Display */}
+                  <div className="border-none">
+                    <Label className="text-sm font-semibold mb-2 block">{t("detail.address", "Address")}</Label>
+                    <div className="text-sm text-[var(--muted-foreground)] p-3 rounded-md border border-[var(--border)] bg-[var(--muted)]/30">
+                      {editTaskData.address || t("detail.noAddress", "No address set")}
+                    </div>
+                  </div>
+
+                  <Label className="text-sm font-semibold mb-2 block">{t("detail.description", "Description")}</Label>
+                  <TaskDescription
+                    value={editTaskData.description}
+                    editMode={false}
+                    onChange={(value) => handleTaskFieldChange("description", value)}
+                    onSaveRequest={handleCheckboxSave}
+                    emailThreadId={task.emailThreadId}
+                  />
+                </div>
               )}
             </div>
 

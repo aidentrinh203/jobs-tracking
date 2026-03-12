@@ -61,6 +61,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    address: "",
     status: "",
     priority: "MEDIUM",
     type: "TASK",
@@ -109,6 +110,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
   const handleProjectChange = (projectId: string) => {
     const project = projects.find((p) => p.id === projectId);
     setSelectedProject(project);
+    setFormData((prev) => ({ ...prev, address: project?.address || "" }));
     setAssignees([]);
     setReporters([]);
   };
@@ -269,9 +271,11 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
       const project = projects.find((p) => p.slug === projectSlug);
       if (project && selectedProject?.id !== project.id) {
         setSelectedProject(project);
+        setFormData((prev) => ({ ...prev, address: project?.address || "" }));
       }
     } else if (projects.length === 1 && !selectedProject) {
       setSelectedProject(projects[0]);
+      setFormData((prev) => ({ ...prev, address: projects[0]?.address || "" }));
     }
   }, [projectSlug, projects, selectedProject?.id]);
 
@@ -294,6 +298,7 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
       const taskData: any = {
         title: formData.title.trim(),
         description: formData.description.trim() || "",
+        address: formData.address.trim() || undefined,
         priority: formData.priority.toUpperCase() as "LOW" | "MEDIUM" | "HIGH" | "HIGHEST",
         type: formData.type as "TASK" | "BUG" | "EPIC" | "STORY" | "SUBTASK",
         storyPoints: formData.storyPoints ? parseInt(formData.storyPoints) : undefined,
@@ -357,9 +362,35 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
                     className="border-[var(--border)] bg-[var(--background)]"
                   />
                 </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="address">Address</Label>
+                  <Input
+                    id="address"
+                    name="address"
+                    value={formData.address}
+                    onChange={(e) => handleFormDataChange("address", e.target.value)}
+                    placeholder="Enter job address or location..."
+                    className="border-[var(--border)] bg-[var(--background)]"
+                  />
+                </div>
               </CardContent>
             </Card>
 
+            <Card className="border-none bg-[var(--card)] gap-0 rounded-md">
+              <CardHeader className="pb-0">
+                <TaskSectionHeader icon={HiDocumentText} title="Description" />
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <TaskDescription
+                  value={formData.description}
+                  onChange={(value) => handleFormDataChange("description", value)}
+                  editMode={true}
+                />
+              </CardContent>
+            </Card>
+
+            
             <Card className="border-none bg-[var(--card)] gap-0 rounded-md">
               <CardHeader className="flex items-center justify-between pb-2">
                 <TaskSectionHeader
@@ -424,18 +455,6 @@ export default function CreateTask({ projectSlug, workspace, projects }: CreateT
               </CardContent>
             </Card>
 
-            <Card className="border-none bg-[var(--card)] gap-0 rounded-md">
-              <CardHeader className="pb-0">
-                <TaskSectionHeader icon={HiDocumentText} title="Description" />
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <TaskDescription
-                  value={formData.description}
-                  onChange={(value) => handleFormDataChange("description", value)}
-                  editMode={true}
-                />
-              </CardContent>
-            </Card>
           </form>
         </div>
 

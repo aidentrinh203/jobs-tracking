@@ -57,6 +57,7 @@ function ProjectSettingsContent() {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
+    address: "",
     slug: "",
     status: "ACTIVE",
     visibility: "PRIVATE",
@@ -93,6 +94,7 @@ function ProjectSettingsContent() {
         setFormData({
           name: projectData.name || "",
           description: projectData.description || "",
+          address: projectData.address || "",
           slug: projectData.slug || "",
           status: projectData.status || "ACTIVE",
           visibility: projectData.visibility || "PRIVATE",
@@ -231,6 +233,7 @@ function ProjectSettingsContent() {
         setFormData({
           name: projectData.name || "",
           description: projectData.description || "",
+          address: projectData.address || "",
           slug: projectData.slug || "",
           status: projectData.status || "ACTIVE",
           visibility: projectData.visibility || "PRIVATE",
@@ -287,6 +290,7 @@ function ProjectSettingsContent() {
         name: formData.name.trim(),
         slug: formData.slug.trim(),
         description: formData.description.trim(),
+        address: formData.address.trim() || undefined,
         status: formData.status,
         visibility: formData.visibility,
       });
@@ -449,6 +453,20 @@ function ProjectSettingsContent() {
                       />
                       <p className="text-xs text-[var(--muted-foreground)]">
                         Used in URLs. Only lowercase letters, numbers, and hyphens are allowed.
+                      </p>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="address">Address</Label>
+                      <Input
+                        id="address"
+                        value={formData.address}
+                        onChange={(e) => handleInputChange("address", e.target.value)}
+                        placeholder="Enter project address or location..."
+                        disabled={saving || !hasAccess}
+                      />
+                      <p className="text-xs text-[var(--muted-foreground)]">
+                        Specify the physical location or construction site address.
                       </p>
                     </div>
 

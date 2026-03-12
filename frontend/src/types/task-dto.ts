@@ -3,6 +3,7 @@ import { Task } from "./tasks";
 export interface CreateTaskRequest {
   title: string;
   description?: string;
+  address?: string;
   type?: "TASK" | "STORY" | "BUG" | "EPIC" | "SUBTASK";
   priority?: "LOW" | "MEDIUM" | "HIGH" | "HIGHEST";
   startDate?: string;
@@ -40,6 +41,7 @@ export interface UpdateTaskRequest {
   remainingEstimate?: number;
   price?: number;
   feet2?: number;
+  address?: string;
   assigneeIds?: string[];
   reporterIds?: string[];
   statusId?: string;

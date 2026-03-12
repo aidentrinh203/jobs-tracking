@@ -115,6 +115,9 @@ export const taskApi = {
       if (taskData.completedAt !== undefined) {
         formData.append("completedAt", taskData.completedAt || "");
       }
+      if (taskData.address) {
+        formData.append("address", taskData.address);
+      }
 
       // Append number fields
       if (taskData.storyPoints !== undefined) {
@@ -125,6 +128,12 @@ export const taskApi = {
       }
       if (taskData.remainingEstimate !== undefined) {
         formData.append("remainingEstimate", taskData.remainingEstimate.toString());
+      }
+      if (taskData.price !== undefined) {
+        formData.append("price", taskData.price.toString());
+      }
+      if (taskData.feet2 !== undefined) {
+        formData.append("feet2", taskData.feet2.toString());
       }
 
       // Append array fields as JSON strings

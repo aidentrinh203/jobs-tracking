@@ -134,6 +134,16 @@ export class CreateTaskDto {
   feet2?: number;
 
   @ApiProperty({
+    description: 'Task address or location (e.g., construction site address)',
+    example: '123 Main Street, Springfield, IL 62701',
+    maxLength: 500,
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  address?: string;
+
+  @ApiProperty({
     description: 'Custom fields specific to the task',
     example: {
       severity: 'critical',

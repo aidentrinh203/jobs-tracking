@@ -65,6 +65,16 @@ export class CreateProjectDto {
   description?: string;
 
   @ApiProperty({
+    description: 'Project address or location (e.g., construction site address)',
+    example: '123 Main Street, Springfield, IL 62701',
+    required: false,
+    maxLength: 500,
+  })
+  @IsString()
+  @IsOptional()
+  address?: string;
+
+  @ApiProperty({
     description: 'Current project status',
     enum: ProjectStatus,
     example: ProjectStatus.PLANNING,

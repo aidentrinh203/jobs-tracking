@@ -51,6 +51,7 @@ import { toast } from "sonner";
 import { PRIORITY_OPTIONS, TASK_TYPE_OPTIONS } from "@/utils/data/taskData";
 interface FormData {
   title: string;
+  address: string;
   workspace: {
     id: string;
     name: string;
@@ -60,6 +61,7 @@ interface FormData {
     id: string;
     name: string;
     slug: string;
+    address?: string;
   } | null;
   dueDate: string;
   priority: string;
@@ -98,6 +100,7 @@ export function NewTaskModal({
 
   const [formData, setFormData] = useState<FormData>({
     title: "",
+    address: "",
     workspace: null,
     project: null,
     dueDate: "",
@@ -338,7 +341,9 @@ export function NewTaskModal({
           id: project.id,
           name: project.name,
           slug: project.slug,
+          address: project.address,
         },
+        address: project.address || "",
       }));
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : t("modal.errorLoadProject");
@@ -478,6 +483,7 @@ export function NewTaskModal({
         const taskData: any = {
           title: formData.title.trim(),
           description: "",
+          address: formData.address.trim() || undefined,
           priority: formData.priority as "LOW" | "MEDIUM" | "HIGH" | "HIGHEST",
           type: ["TASK", "BUG", "EPIC", "STORY", "SUBTASK"].includes(formData.type)
             ? formData.type
@@ -522,6 +528,7 @@ export function NewTaskModal({
   const handleClose = useCallback(() => {
     setFormData({
       title: "",
+      address: "",
       workspace: null,
       project: null,
       dueDate: "",
@@ -620,6 +627,36 @@ export function NewTaskModal({
                 e.target.style.boxShadow = "none";
               }}
               autoFocus
+              disabled={isSubmitting}
+            />
+          </div>
+
+          {/* Address Field */}
+          <div className="projects-form-field">
+            <Label htmlFor="address" className="projects-form-label">
+              <HiDocumentText
+                className="projects-form-label-icon"
+                style={{ color: "hsl(var(--primary))" }}
+              />
+              {t("modal.address", "Address")}
+            </Label>
+            <Input
+              id="address"
+              placeholder={t("modal.enterAddress", "Enter address or location...")}
+              value={formData.address}
+              onChange={(e) => setFormData((prev) => ({ ...prev, address: e.target.value }))}
+              className="projects-workspace-button border-none"
+              style=
+                {{
+                  "--tw-ring-color": "hsl(var(--primary) / 0.2)",
+                } as any
+              }
+              onFocus={(e) => {
+                e.target.style.boxShadow = "none";
+              }}
+              onBlur={(e) => {
+                e.target.style.boxShadow = "none";
+              }}
               disabled={isSubmitting}
             />
           </div>
@@ -774,7 +811,9 @@ export function NewTaskModal({
                                 id: project.id,
                                 name: project.name,
                                 slug: project.slug,
+                                address: project.address,
                               },
+                              address: project.address || "",
                             }));
                             setProjectOpen(false);
                           }}

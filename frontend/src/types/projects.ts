@@ -17,6 +17,7 @@ export interface Project {
   name: string;
   key: string;
   description?: string;
+  address?: string;
   color?: string;
   status?: string;
   priority?: string;
@@ -57,6 +58,7 @@ export interface ProjectData {
   color: string;
   avatar?: string;
   description: string;
+  address?: string;
   status: string;
   priority: string;
   visibility?: ProjectVisibility | string;
