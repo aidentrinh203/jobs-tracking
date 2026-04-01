@@ -88,9 +88,9 @@ export default function NotificationScreen({ userId, organizationId }: Notificat
 
   const getTypeLabel = (type: NotificationType) => {
     const labelMap = {
-      TASK_ASSIGNED: "Job Assigned",
-      TASK_STATUS_CHANGED: "Job Status",
-      TASK_COMMENTED: "Job Comment",
+      TASK_ASSIGNED: "Task Assigned",
+      TASK_STATUS_CHANGED: "Task Status",
+      TASK_COMMENTED: "Task Comment",
       TASK_DUE_SOON: "Due Soon",
       PROJECT_CREATED: "Project Created",
       PROJECT_UPDATED: "Project Updated",

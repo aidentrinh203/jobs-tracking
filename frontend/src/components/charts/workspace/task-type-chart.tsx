@@ -68,8 +68,8 @@ export function TaskTypeChart({ data, workspaceId }: TaskTypeChartProps) {
 
   return (
     <ChartWrapper
-      title="Job Type Distribution"
-      description="Types of jobs across workspace"
+      title="Task Type Distribution"
+      description="Types of tasks across workspace"
       config={chartConfig}
       className="border-[var(--border)]"
     >

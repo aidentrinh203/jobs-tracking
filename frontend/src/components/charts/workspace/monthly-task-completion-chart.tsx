@@ -9,7 +9,7 @@ import {
 import { ChartWrapper } from "../chart-wrapper";
 
 const chartConfig = {
-  completion: { label: "Jobs Completed", color: "#3B82F6" },
+  completion: { label: "Tasks Completed", color: "#3B82F6" },
 };
 
 interface MonthlyTaskCompletionChartProps {
@@ -29,7 +29,7 @@ export function MonthlyTaskCompletionChart({ data }: MonthlyTaskCompletionChartP
 
   return (
     <ChartWrapper
-      title="Monthly Job Completion Trend"
+      title="Monthly Task Completion Trend"
       description="Tasks completed per month across workspace"
       config={chartConfig}
       className="border-[var(--border)]"

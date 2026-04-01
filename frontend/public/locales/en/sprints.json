@@ -19,12 +19,12 @@
     "loadingProjectError": "Error loading project data",
     "loadingPageError": "Error loading page data",
     "fetchingProjectError": "Error fetching project data",
-    "fetchTasksFailed": "Failed to fetch jobs"
+    "fetchTasksFailed": "Failed to fetch tasks"
   },
   "sprintTasks": {
-    "title": "Sprint Jobs",
-    "description": "Manage and track all jobs in this sprint. {{total}} total jobs",
-    "searchPlaceholder": "Search jobs..."
+    "title": "Sprint Tasks",
+    "description": "Manage and track all tasks in this sprint. {{total}} total tasks",
+    "searchPlaceholder": "Search tasks..."
   },
   "card": {
     "noDates": "No dates set",
@@ -71,11 +71,11 @@
     "noSprintSelected": "No Sprint Selected",
     "selectSprintToView": "Please select a sprint to view the board",
     "noSprintSelectedSubtitle": "Please select a sprint from the dropdown above to view progress.",
-    "tasks": "jobs",
+    "tasks": "tasks",
     "points": "points",
     "startSprint": "Start Sprint",
     "completeSprint": "Complete Sprint",
-    "tasksCompleted": "Jobs Completed",
+    "tasksCompleted": "Tasks Completed",
     "storyPoints": "Story Points",
     "completionRate": "Completion Rate",
     "statuses": {
@@ -98,7 +98,7 @@
     "complete": "complete",
     "timeSpent": "Time Spent",
     "estimated": "estimated",
-    "tasksComplete": "Jobs Complete",
+    "tasksComplete": "Tasks Complete",
     "inProgress": "in progress",
     "velocity": "Velocity",
     "storyPointsPerDay": "Story points per day",
@@ -122,19 +122,19 @@
     "capacity": "Capacity",
     "hours": "hours",
     "productBacklog": "Product Backlog",
-    "tasks": "jobs",
+    "tasks": "tasks",
     "sp": "SP",
-    "noTasksInBacklog": "No jobs in backlog",
+    "noTasksInBacklog": "No tasks in backlog",
     "sprintBacklog": "Sprint Backlog",
-    "dragTasksHere": "Drag jobs here to add to sprint",
-    "clickToMove": "Click jobs to move them between backlog and sprint",
+    "dragTasksHere": "Drag tasks here to add to sprint",
+    "clickToMove": "Click tasks to move them between backlog and sprint",
     "summary": "Sprint Summary",
     "estimatedTime": "Estimated Time"
   },
   "tasksPanel": {
-    "title": "Sprint Jobs",
-    "tasks": "jobs",
+    "title": "Sprint Tasks",
+    "tasks": "tasks",
     "errorNoOrg": "No organization selected. Please select an organization first.",
-    "fetchFailed": "Failed to fetch jobs"
+    "fetchFailed": "Failed to fetch tasks"
   }
 }

@@ -83,7 +83,7 @@ export default function SprintBoard({ projectId, sprintId }: SprintBoardProps) {
     {
       id: "status-1",
       name: t("board.statuses.sprintBacklog", { defaultValue: "Sprint Backlog" }),
-      description: "Job planned for this sprint",
+      description: "Tasks planned for this sprint",
       color: "#64748b",
       category: "TODO" as any,
       order: 1,
@@ -93,7 +93,7 @@ export default function SprintBoard({ projectId, sprintId }: SprintBoardProps) {
     {
       id: "status-2",
       name: t("board.statuses.inProgress", { defaultValue: "In Progress" }),
-      description: "Job currently being worked on",
+      description: "Tasks currently being worked on",
       color: "#f59e0b",
       category: "IN_PROGRESS" as any,
       order: 2,
@@ -103,7 +103,7 @@ export default function SprintBoard({ projectId, sprintId }: SprintBoardProps) {
     {
       id: "status-3",
       name: t("board.statuses.testing", { defaultValue: "Testing" }),
-      description: "Job being tested",
+      description: "Tasks being tested",
       color: "#3b82f6",
       category: "IN_PROGRESS" as any,
       order: 3,

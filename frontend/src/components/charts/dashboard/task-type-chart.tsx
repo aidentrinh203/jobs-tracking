@@ -31,7 +31,7 @@ export function TaskTypeChart({ data }: TaskTypeChartProps) {
 
   return (
     <ChartWrapper
-      title="Job Type Distribution"
+      title="Task Type Distribution"
       description={`${totalTasks} total tasks across organization`}
       config={chartConfig}
       className="border-[var(--border)]"

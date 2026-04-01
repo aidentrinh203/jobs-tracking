@@ -87,7 +87,7 @@ export default function InboxConfigurationStep({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label className="pb-2 text-sm font-medium" htmlFor="defaultTaskType">
-              Default Job Type
+              Default Task Type
             </Label>
             <Select
               value={formData.defaultTaskType}
@@ -203,7 +203,7 @@ export default function InboxConfigurationStep({
           <div className="flex items-center justify-between">
             <div>
               <Label className="pb-2 cursor-pointer text-sm font-medium" htmlFor="autoCreateTask">
-                Auto-create Jobs
+                Auto-create Tasks
               </Label>
               <p className="text-sm text-[var(--muted-foreground)]/60">
                 Automatically convert emails to tasks

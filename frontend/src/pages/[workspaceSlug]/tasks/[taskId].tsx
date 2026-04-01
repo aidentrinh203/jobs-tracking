@@ -22,37 +22,37 @@ function TaskDetailContent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTask = async () => {
-    if (!cleanTaskId) {
-      if (router.isReady && isAuthenticated()) {
-         setError("Task ID required");
-         setLoading(false);
-      }
-      return;
-    }
-    
-    if (!isAuthenticated()) {
-       return; // Auth context will handle redirect usually, or layout
-    }
-
-    try {
-      const taskData = await getTaskById(cleanTaskId as string, isAuthenticated());
-
-      if (!taskData) {
-        setError("Job not found");
-        setLoading(false);
+  useEffect(() => {
+    const fetchTask = async () => {
+      if (!cleanTaskId) {
+        if (router.isReady && isAuthenticated()) {
+           setError("Task ID required");
+           setLoading(false);
+        }
         return;
       }
+      
+      if (!isAuthenticated()) {
+         return; // Auth context will handle redirect usually, or layout
+      }
 
-      setTask(taskData);
-    } catch (err) {
-      setError(err?.message ? err.message : "Failed to load task");
-    } finally {
-      setLoading(false);
-    }
-  };
+      try {
+        const taskData = await getTaskById(cleanTaskId as string, isAuthenticated());
 
-  useEffect(() => {
+        if (!taskData) {
+          setError("Task not found");
+          setLoading(false);
+          return;
+        }
+
+        setTask(taskData);
+      } catch (err) {
+        setError(err?.message ? err.message : "Failed to load task");
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchTask();
   }, [cleanTaskId, router.isReady, isAuthenticated]);
 
@@ -111,7 +111,6 @@ function TaskDetailContent() {
           workspaceSlug={workspaceSlug as string}
           projectSlug={projectSlug as string}
           taskId={cleanTaskId as string}
-          onTaskRefetch={fetchTask}
         />
       </Suspense>
     </div>

@@ -12,10 +12,10 @@
   "widgets": {
     "kpi_metrics": "KPI Metrics",
     "project_status": "Project Status Distribution",
-    "task_priority":  "Job Priority Breakdown",
-    "task_type":  "Job Type Distribution",
+    "task_priority": "Task Priority Breakdown",
+    "task_type": "Task Type Distribution",
     "sprint_status": "Sprint Status Overview",
-    "monthly_completion": "Monthly Job Completion",
+    "monthly_completion": "Monthly Task Completion",
     "team_utilization": "Team Role Distribution",
     "quality_metrics": "Bug Resolution Quality",
     "workspace_projects": "Projects per Workspace",
@@ -24,19 +24,19 @@
   },
   "charts": {
     "project_status_description": "Current status breakdown of all projects",
-    "task_priority_description": "Overview of jobs by their priority levels",
-    "task_type_description": "Distribution of jobs by their type",
+    "task_priority_description": "Overview of tasks by their priority levels",
+    "task_type_description": "Distribution of tasks by their type",
     "sprint_status_description": "Current status of all sprints in this workspace",
     "kpi_metrics_description": "Key performance indicators for your workspace",
-    "monthly_completion_description": "Number of jobs completed each month"
+    "monthly_completion_description": "Number of tasks completed each month"
   },
   "kpi": {
     "total_projects": "Total Projects",
     "active_projects": "Active Projects",
     "completion_rate": "Completion Rate",
-    "total_tasks": "Total Jobs",
-    "overdue_tasks": "Overdue Jobs",
-    "task_health":  "Job Health",
+    "total_tasks": "Total Tasks",
+    "overdue_tasks": "Overdue Tasks",
+    "task_health": "Task Health",
     "excellent": "Excellent",
     "good": "Good",
     "needs_focus": "Needs Focus",
@@ -47,10 +47,10 @@
   "header": {
     "ready_to_tackle": "Ready to tackle your goals?",
     "todays_agenda": "Today's Agenda",
-    "new_task": "New Job"
+    "new_task": "New Task"
   },
   "analytics": {
-    "failed_to_fetch_today_task_data": "Failed to fetch today job data",
+    "failed_to_fetch_today_task_data": "Failed to fetch today task data",
     "error_loading_organization_analytics": "Error loading organization analytics:",
     "today_agenda_tooltip": "Today Agenda",
     "dashboard_settings_tooltip": "Dashboard Settings",
@@ -67,19 +67,19 @@
       "workspaces": "Total Workspaces",
       "projects": "Total Projects",
       "members": "Team Members",
-      "task_completion":  "Job Completion",
+      "task_completion": "Task Completion",
       "bug_resolution": "Bug Resolution",
-      "overdue_tasks": "Overdue Jobs",
+      "overdue_tasks": "Overdue Tasks",
       "active_sprints": "Active Sprints",
       "productivity": "Overall Productivity",
       "descriptions": {
         "active_status": "{{count}} active",
         "organization_members": "Organization members",
-        "tasks_count": "{{completed}} / {{total}} jobs",
+        "tasks_count": "{{completed}} / {{total}} tasks",
         "resolved_count": "{{resolved}} / {{total}} resolved",
         "require_attention": "Require attention",
         "currently_running": "Currently running",
-        "task_completion_rate":  "Job completion rate"
+        "task_completion_rate": "Task completion rate"
       }
     }
   }

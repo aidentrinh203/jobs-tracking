@@ -216,7 +216,7 @@ export function WorkspaceProvider({ children }: WorkspaceProviderProps) {
           ),
           taskPriority: processChartData(
             results[WorkspaceChartType.TASK_PRIORITY],
-            "Job Priority"
+            "Task Priority"
           ),
           kpiMetrics: processChartData(results[WorkspaceChartType.KPI_METRICS], "KPI Metrics"),
           taskType: processChartData(results[WorkspaceChartType.TASK_TYPE], "Task Type"),

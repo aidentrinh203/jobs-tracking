@@ -29,7 +29,7 @@ export function TaskDistributionChart({ data }: TaskDistributionChartProps) {
 
   return (
     <ChartWrapper
-      title="Job Priority Distribution"
+      title="Task Priority Distribution"
       description="Priority breakdown across all projects"
       config={chartConfig}
       className="border-[var(--border)]"

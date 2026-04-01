@@ -1,9 +1,9 @@
 {
   "title": "{{name}} Calendar",
-  "description": "View and manage jobs for {{name}} project in calendar format.",
-  "createTask": "Create Jobs",
+  "description": "View and manage tasks for {{name}} project in calendar format.",
+  "createTask": "Create Task",
   "noTasks": {
-    "title": "No jobs found",
+    "title": "No tasks found",
     "description": "Create your first task for {{name}} to see it on the calendar"
   },
   "errors": {
@@ -14,8 +14,8 @@
     "projectOrWorkspaceNotFound": "Project or workspace not found"
   },
   "view": {
-    "noTasksScheduled": "No jobs scheduled",
-    "noTasksScheduledDescription": "Jobs with due dates will appear on the calendar. Create jobs with specific due dates to visualize your schedule.",
+    "noTasksScheduled": "No tasks scheduled",
+    "noTasksScheduledDescription": "Tasks with due dates will appear on the calendar. Create tasks with specific due dates to visualize your schedule.",
     "days": {
       "sun": "Sun",
       "mon": "Mon",
@@ -25,16 +25,16 @@
       "fri": "Fri",
       "sat": "Sat"
     },
-    "untitledTask": "Untitled Jobs",
+    "untitledTask": "Untitled Task",
     "more": "more",
     "time": "Time",
     "weekOf": "Week of {{date}}",
-    "daysWithTasks": "{{count}} days with jobs this month",
-    "tasksThisWeek": "{{count}} jobs this week",
+    "daysWithTasks": "{{count}} days with tasks this month",
+    "tasksThisWeek": "{{count}} tasks this week",
     "month": "Month",
     "week": "Week",
     "today": "Today",
-    "noTasksThisDay": "No jobs scheduled for this day",
+    "noTasksThisDay": "No tasks scheduled for this day",
     "noStatus": "No Status",
     "overdue": "Overdue",
     "assignee": "Assignee"

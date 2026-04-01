@@ -22,41 +22,41 @@ function TaskDetailContent() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchTask = async () => {
-    if (!router.isReady) return;
+  useEffect(() => {
+    const fetchTask = async () => {
+      if (!router.isReady) return;
 
-    if (!cleanTaskId) {
-      setError("Job ID required");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const taskData = await getTaskById(cleanTaskId as string, isAuthenticated());
-
-      if (!taskData) {
-        if (!isAuthenticated()) {
-          router.push(`/login?redirect=${encodeURIComponent(router.asPath)}`);
-          return;
-        }
-        setError("Job not found");
+      if (!cleanTaskId) {
+        setError("Task ID required");
         setLoading(false);
         return;
       }
 
-      setTask(taskData);
-      setLoading(false);
-    } catch (err) {
-      if (!isAuthenticated()) {
-        router.push(`/login?redirect=${encodeURIComponent(router.asPath)}`);
-        return;
-      }
-      setError(err?.message ? err.message : "Failed to load task");
-      setLoading(false);
-    }
-  };
+      try {
+        const taskData = await getTaskById(cleanTaskId as string, isAuthenticated());
 
-  useEffect(() => {
+        if (!taskData) {
+          if (!isAuthenticated()) {
+            router.push(`/login?redirect=${encodeURIComponent(router.asPath)}`);
+            return;
+          }
+          setError("Task not found");
+          setLoading(false);
+          return;
+        }
+
+        setTask(taskData);
+        setLoading(false);
+      } catch (err) {
+        if (!isAuthenticated()) {
+          router.push(`/login?redirect=${encodeURIComponent(router.asPath)}`);
+          return;
+        }
+        setError(err?.message ? err.message : "Failed to load task");
+        setLoading(false);
+      }
+    };
+
     fetchTask();
   }, [cleanTaskId, router.isReady, isAuthenticated]);
 
@@ -115,7 +115,6 @@ function TaskDetailContent() {
           workspaceSlug={workspaceSlug as string}
           projectSlug={projectSlug as string}
           taskId={cleanTaskId as string}
-          onTaskRefetch={fetchTask}
         />
       </Suspense>
     </div>
