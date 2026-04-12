@@ -31,7 +31,10 @@ import { useProject } from "@/contexts/project-context";
 import { getCurrentWorkspaceId } from "@/utils/hierarchyContext";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { PROJECT_CATEGORIES } from "@/utils/data/projectData";
+import { TASK_TYPE_OPTIONS } from "@/utils/data/taskData";
 import { workflowsApi } from "@/utils/api/workflowsApi";
+import { taskApi } from "@/utils/api/taskApi";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface NewProjectModalProps {
   isOpen: boolean;
@@ -69,6 +72,7 @@ export function NewProjectModal({
     workflowId: "",
     visibility: "PRIVATE" as const,
   });
+  const [selectedTaskTypes, setSelectedTaskTypes] = useState<string[]>([]);
 
   const generateSlug = (name: string) => {
     return name
@@ -284,8 +288,43 @@ export function NewProjectModal({
         },
       };
 
-      await createProject(projectData);
+      const newProject = await createProject(projectData);
       toast.success(`Project "${formData.name}" created successfully!`);
+      
+      // Auto-generate tasks for selected task types
+      if (selectedTaskTypes.length > 0) {
+        try {
+          const taskCreationPromises = selectedTaskTypes.map(async (taskType) => {
+            const taskTypeOption = TASK_TYPE_OPTIONS.find(opt => opt.value === taskType);
+            if (!taskTypeOption) return;
+
+            // Get the default status for the project
+            const defaultStatus = selectedWorkflowStatuses.find(
+              (status: any) => status.isDefault || status.name.toLowerCase() === "todo"
+            ) || selectedWorkflowStatuses[0];
+
+            const taskData = {
+              title: taskTypeOption.label,
+              description: `Auto-generated ${taskTypeOption.label} task`,
+              projectId: newProject.id,
+              statusId: defaultStatus?.id || selectedWorkflowStatuses[0]?.id,
+              priority: "MEDIUM" as const,
+              type: taskType as any,
+              startDate: new Date().toISOString(),
+              dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+            };
+
+            return taskApi.createTask(taskData);
+          });
+
+          await Promise.all(taskCreationPromises);
+          toast.success(`${selectedTaskTypes.length} task(s) created automatically!`);
+        } catch (error) {
+          console.error("Failed to create auto-generated tasks:", error);
+          toast.error("Project created, but some tasks failed to generate");
+        }
+      }
+      
       handleClose();
       document.body.style.pointerEvents = "auto";
     } catch (error) {
@@ -315,6 +354,7 @@ export function NewProjectModal({
     setWorkflowOpen(false);
     setWorkflowSearch("");
     setVisibilityOpen(false);
+    setSelectedTaskTypes([]);
     onClose();
   };
 
@@ -760,6 +800,47 @@ export function NewProjectModal({
                 style={{ color: "var(--dynamic-primary)" }}
               />
               Specify the physical location or construction site address.
+            </p>
+          </div>
+
+          {/* Auto-generate Tasks */}
+          <div className="projects-form-field">
+            <Label className="projects-form-label">
+              <HiSparkles
+                className="projects-form-label-icon"
+                style={{ color: "var(--dynamic-primary)" }}
+              />
+              Auto-generate Tasks
+            </Label>
+            <div className="space-y-3 p-4 rounded-md border" style={{ borderColor: "var(--border)", backgroundColor: "var(--background)" }}>
+              {TASK_TYPE_OPTIONS.map((taskType) => (
+                <div key={taskType.value} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={`task-type-${taskType.value}`}
+                    checked={selectedTaskTypes.includes(taskType.value)}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setSelectedTaskTypes([...selectedTaskTypes, taskType.value]);
+                      } else {
+                        setSelectedTaskTypes(selectedTaskTypes.filter(t => t !== taskType.value));
+                      }
+                    }}
+                  />
+                  <label
+                    htmlFor={`task-type-${taskType.value}`}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  >
+                    {taskType.label}
+                  </label>
+                </div>
+              ))}
+            </div>
+            <p className="projects-form-hint">
+              <HiSparkles
+                className="projects-form-hint-icon"
+                style={{ color: "var(--dynamic-primary)" }}
+              />
+              Select task types to automatically create when the project is created.
             </p>
           </div>
 
