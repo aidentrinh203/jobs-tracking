@@ -1,3 +1,10 @@
+export const PROJECT_PRIORITY_OPTIONS = [
+  { value: "LOW", label: "Low" },
+  { value: "MEDIUM", label: "Medium" },
+  { value: "HIGH", label: "High" },
+  { value: "URGENT", label: "Urgent" },
+];
+
 export const PROJECT_CATEGORIES = [
   {
     id: "operational",

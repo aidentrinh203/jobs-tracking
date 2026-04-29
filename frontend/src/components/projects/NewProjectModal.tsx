@@ -12,6 +12,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import ActionButton from "@/components/common/ActionButton";
 import { toast } from "sonner";
 import {
@@ -24,13 +31,14 @@ import {
   HiRocketLaunch,
   HiCog,
   HiGlobeAlt,
+  HiFlag,
 } from "react-icons/hi2";
 import { HiColorSwatch } from "react-icons/hi";
 import { useWorkspace } from "@/contexts/workspace-context";
 import { useProject } from "@/contexts/project-context";
 import { getCurrentWorkspaceId } from "@/utils/hierarchyContext";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { PROJECT_CATEGORIES } from "@/utils/data/projectData";
+import { PROJECT_CATEGORIES, PROJECT_PRIORITY_OPTIONS } from "@/utils/data/projectData";
 import { TASK_TYPE_OPTIONS } from "@/utils/data/taskData";
 import { workflowsApi } from "@/utils/api/workflowsApi";
 import { taskApi } from "@/utils/api/taskApi";
@@ -71,6 +79,7 @@ export function NewProjectModal({
     category: "operational",
     workflowId: "",
     visibility: "PRIVATE" as const,
+    priority: "MEDIUM" as string,
   });
   const [selectedTaskTypes, setSelectedTaskTypes] = useState<string[]>([]);
 
@@ -116,6 +125,16 @@ export function NewProjectModal({
   const [workflowOpen, setWorkflowOpen] = useState(false);
   const [workflowSearch, setWorkflowSearch] = useState("");
   const [visibilityOpen, setVisibilityOpen] = useState(false);
+
+  const projectToTaskPriority = (projectPriority: string): string => {
+    const mapping: Record<string, string> = {
+      LOW: "LOW",
+      MEDIUM: "MEDIUM",
+      HIGH: "HIGH",
+      URGENT: "HIGHEST",
+    };
+    return mapping[projectPriority] || "MEDIUM";
+  };
 
   const filteredWorkspaces = allWorkspaces.filter((workspace) =>
     workspace.name.toLowerCase().includes(workspaceSearch.toLowerCase())
@@ -273,7 +292,7 @@ export function NewProjectModal({
         address: formData.address.trim() || undefined,
         color: formData.color,
         status: "ACTIVE" as const,
-        priority: "MEDIUM" as const,
+        priority: formData.priority as any,
         visibility: formData.visibility,
         startDate: new Date().toISOString(),
         endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
@@ -308,7 +327,7 @@ export function NewProjectModal({
               description: `Auto-generated ${taskTypeOption.label} task`,
               projectId: newProject.id,
               statusId: defaultStatus?.id || selectedWorkflowStatuses[0]?.id,
-              priority: "MEDIUM" as const,
+              priority: projectToTaskPriority(formData.priority) as any,
               type: taskType as any,
               startDate: new Date().toISOString(),
               dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
@@ -346,6 +365,7 @@ export function NewProjectModal({
       category: "operational",
       workflowId: "",
       visibility: "PRIVATE",
+      priority: "MEDIUM",
     });
     setWorkspaceSearch("");
     setAllWorkspaces([]);
@@ -643,6 +663,43 @@ export function NewProjectModal({
                 style={{ color: "var(--dynamic-primary)" }}
               />
               Control who can access this project.
+            </p>
+          </div>
+
+          {/* Priority - Dropdown */}
+          <div className="projects-form-field">
+            <Label className="projects-form-label">
+              <HiFlag
+                className="projects-form-label-icon"
+                style={{ color: "var(--dynamic-primary)" }}
+              />
+              Priority
+            </Label>
+            <Select
+              value={formData.priority}
+              onValueChange={(value) => setFormData((prev) => ({ ...prev, priority: value }))}
+            >
+              <SelectTrigger className="w-full border-[var(--border)] bg-[var(--background)]">
+                <SelectValue placeholder="Select priority" />
+              </SelectTrigger>
+              <SelectContent className="border-[var(--border)] bg-[var(--popover)]">
+                {PROJECT_PRIORITY_OPTIONS.map((option) => (
+                  <SelectItem
+                    className="hover:bg-[var(--hover-bg)]"
+                    key={option.value}
+                    value={option.value}
+                  >
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="projects-form-hint">
+              <HiFlag
+                className="projects-form-hint-icon"
+                style={{ color: "var(--dynamic-primary)" }}
+              />
+              Set the priority level for this project.
             </p>
           </div>
 
